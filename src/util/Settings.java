@@ -8,6 +8,45 @@ package util;
  */
 public class Settings {
 
+    public static class Audio {
+
+        public enum Alphabet {
+            A("A", "A.WAV");
+
+            private final String letter;
+            private final String fileName;
+            private final String origin = "/resources/audio/";
+
+            private Alphabet(String letter, String fileName) {
+                this.letter = letter;
+                this.fileName = origin + fileName;
+            }
+            
+            public String getFileName(){
+                return this.fileName;
+            }
+            
+        }
+
+        public enum Number {
+            ZERO(0, "0.WAV"),
+            ONE(1, "1.WAV");
+            
+            private final int number;
+            private final String fileName;
+            private final String origin = "/resources/audio/";
+            
+            private Number(int number, String fileName){
+                this.number = number;
+                this.fileName = origin + fileName;
+            }
+            
+            public String getFileName(){
+                return this.fileName;
+            }
+        }
+    }
+
     /*
     Responsável por informar de forma estatica quais telas podem ser
     Utilizadas.
