@@ -1,5 +1,6 @@
 package controllers.frontend;
 
+import controllers.backend.AudioController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -9,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
-import util.Settings;
 
 /**
  * FXML Controller class
@@ -23,21 +23,20 @@ public class MainController implements Initializable {
     @FXML
     private ToggleButton tgleBtnAudio;
 
+    private AudioController audio;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.audio = new AudioController();
     }
     
     @FXML
     private void playAudio2(KeyEvent event) {
         if(tgleBtnAudio.selectedProperty().get()){
             String character = event.getText();
-            System.out.println("/resources/audio/"+character+".wav");
-            AudioClip audio = new  AudioClip(this.getClass().getResource("/resources/audio/"+character+".wav").toString());
-            audio.play();
+            audio.playAudio(character);
         }else{
             event.consume();
         }
