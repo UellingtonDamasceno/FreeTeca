@@ -4,6 +4,6 @@ package model;
  *
  * @author Uellington Conceição
  */
-public class Administrator {
+public class Administrator extends LogablePerson{
     
 }

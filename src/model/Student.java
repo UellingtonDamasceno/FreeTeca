@@ -9,15 +9,13 @@ import util.Settings.Instituition;
  *
  * @author Uellington Conceição
  */
-public class Student extends Person{
+public class Student extends LogablePerson{
 
-    private List<String> email;
     private List<String> phone;
     
     private Instituition institution;
     private String registration;
     private Course course;
-
 
     public String getRegistration() {
         return registration;
