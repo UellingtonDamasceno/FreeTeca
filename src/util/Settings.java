@@ -38,4 +38,25 @@ public class Settings {
             return this.name;
         }
     }
+    
+    public enum Instituition{
+        UEFS("Universidade Estaudal de Feira de Santana"),
+        UNEB("Universidade do Estado da Baiha"),
+        UNEF("Universidade de Ensino Superior de Feira de Santana"),
+        FAT("Faculdade Anisio Texeira");
+        
+        private String name;
+        
+        private Instituition(String name){
+            this.name = name;
+        }
+        
+        private String getName(){
+            return this.name;
+        }
+    }
+    
+    public enum Course{
+        
+    }
 }
