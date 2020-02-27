@@ -7,7 +7,7 @@ package util;
  * Classe responsável por armazenar configurações estáticas da aplicação.
  */
 public class Settings {
-    
+
     /*
     Responsável por informar de forma estatica quais telas podem ser
     Utilizadas.
@@ -39,18 +39,36 @@ public class Settings {
         }
     }
 
-    public enum Icons{
+    public enum Icons {
         BOOKS("books");
-        
+
         private final String name;
         private final String ORIGIN = "/resources/icons/";
         private final String EXTENSION = ".png";
-        
-        private Icons(String name){
+
+        private Icons(String name) {
             this.name = name;
         }
-        
-        public String getIconPath(){
+
+        public String getIconPath() {
+            return this.ORIGIN + this.name + this.EXTENSION;
+        }
+    }
+
+    public enum Slider {
+        FIRST("1"),
+        SECOND("2"),
+        THIRD("3");
+
+        private final String name;
+        private final String ORIGIN = "/resources/images/";
+        private final String EXTENSION = ".jpg";
+
+        private Slider(String name) {
+            this.name = name;
+        }
+
+        public String getImagePath() {
             return this.ORIGIN + this.name + this.EXTENSION;
         }
     }
