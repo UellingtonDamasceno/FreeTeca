@@ -13,7 +13,7 @@ public class Settings {
     Utilizadas.
      */
     public enum Scenes {
-        MAIN("Main.fxml", "Teste", false);
+        MAIN("Main.fxml", "Inicio", false);
 
         private final String name;
         private final String title;
@@ -36,6 +36,22 @@ public class Settings {
         @Override
         public String toString() {
             return this.name;
+        }
+    }
+
+    public enum Icons{
+        BOOKS("books");
+        
+        private final String name;
+        private final String ORIGIN = "/resources/icons/";
+        private final String EXTENSION = ".png";
+        
+        private Icons(String name){
+            this.name = name;
+        }
+        
+        public String getIconPath(){
+            return this.ORIGIN + this.name + this.EXTENSION;
         }
     }
 }

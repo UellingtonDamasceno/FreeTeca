@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import util.Settings.Icons;
 
 /**
  *
@@ -20,6 +22,8 @@ public class StageController {
         this.stages = new HashMap();
         this.container = new Pane();
         this.stages.put("mainStage", mainStage);
+        mainStage.setResizable(false);
+        mainStage.getIcons().add(new Image(Icons.BOOKS.getIconPath()));
 //        mainStage.initStyle(StageStyle.TRANSPARENT);
     }
     
