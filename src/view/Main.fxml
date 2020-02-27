@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.MainController">
-   <children>
-      <TextField fx:id="txtNumber" layoutX="75.0" layoutY="132.0" onAction="#playAudio" onKeyPressed="#playAudio2" prefHeight="25.0" prefWidth="465.0" />
-      <ToggleButton fx:id="tgleBtnAudio" layoutX="75.0" layoutY="353.0" mnemonicParsing="false" text="Audio" />
-   </children>
-</AnchorPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <StackPane fx:id="stackPane" prefHeight="720.0" prefWidth="426.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <ImageView fx:id="imageViewSlider" fitHeight="720.0" fitWidth="854.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
