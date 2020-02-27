@@ -1,8 +1,7 @@
 package view;
 
-import controllers.backend.AudioController;
+import connections.ConnectionFactory;
 import facade.FacadeFrontend;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -18,6 +17,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            ConnectionFactory.getConnection();
+                    
             FacadeFrontend.getInstance().initialize(primaryStage, Settings.Scenes.MAIN);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

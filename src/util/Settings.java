@@ -59,4 +59,19 @@ public class Settings {
     public enum Course{
         
     }
+    
+    public enum Genere{
+        M("Masculino"),
+        F("Femenino");
+        
+        private final String genere;
+        
+        private Genere(String genere){
+            this.genere = genere;
+        }
+        
+        public String getGenere(){
+            return this.genere;
+        }
+    }
 }
