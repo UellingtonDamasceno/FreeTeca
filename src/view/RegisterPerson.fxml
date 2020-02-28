@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" styleClass="vbox" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.RegisterPersonController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" styleClass="vbox" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.RegisterPersonController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +22,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEmail4" prefHeight="37.0" prefWidth="277.0" styleClass="text-field" />
+                  <TextField fx:id="txtFirstName" prefHeight="37.0" prefWidth="277.0" styleClass="text-field" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -35,7 +35,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEmail3" prefHeight="37.0" prefWidth="289.0" styleClass="text-field" />
+                  <TextField fx:id="txtLastName" prefHeight="37.0" prefWidth="289.0" styleClass="text-field" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -48,7 +48,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <DatePicker prefHeight="37.0" prefWidth="290.0" />
+                  <DatePicker fx:id="dataPiker" prefHeight="37.0" prefWidth="290.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -61,7 +61,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox prefHeight="25.0" prefWidth="330.0" />
+                  <ComboBox fx:id="cbGenere" prefHeight="25.0" prefWidth="330.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -74,7 +74,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEmail1" prefHeight="37.0" prefWidth="353.0" styleClass="text-field" />
+                  <TextField fx:id="txtCpf" prefHeight="37.0" prefWidth="353.0" styleClass="text-field" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -87,7 +87,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEmail5" prefHeight="37.0" prefWidth="314.0" styleClass="text-field" />
+                  <TextField fx:id="txtAddress" prefHeight="37.0" prefWidth="314.0" styleClass="text-field" />
                </children>
                <padding>
                   <Insets left="10.0" />

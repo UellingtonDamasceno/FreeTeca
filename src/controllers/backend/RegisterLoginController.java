@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import util.Settings;
 
@@ -31,9 +32,13 @@ public class RegisterLoginController implements Initializable {
     @FXML
     private TextField txtEmail;
     @FXML
-    private TextField txtEmail1;
-    @FXML
     private Label lblInfo;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    private PasswordField txtConfirPassword;
+    @FXML
+    private TextField txtRecoveryEmail;
 
     /**
      * Initializes the controller class.

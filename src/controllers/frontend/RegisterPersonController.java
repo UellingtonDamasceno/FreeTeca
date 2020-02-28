@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import util.Settings.Scenes;
@@ -26,17 +28,21 @@ import util.Settings.Scenes;
 public class RegisterPersonController implements Initializable {
 
     @FXML
-    private TextField txtEmail4;
-    @FXML
-    private TextField txtEmail3;
-    @FXML
-    private TextField txtEmail1;
-    @FXML
-    private TextField txtEmail5;
-    @FXML
     private Label lblInfo;
     @FXML
     private Button btnNext;
+    @FXML
+    private TextField txtFirstName;
+    @FXML
+    private TextField txtLastName;
+    @FXML
+    private DatePicker dataPiker;
+    @FXML
+    private ComboBox<?> cbGenere;
+    @FXML
+    private TextField txtCpf;
+    @FXML
+    private TextField txtAddress;
 
     /**
      * Initializes the controller class.
