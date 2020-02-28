@@ -54,13 +54,30 @@ public class Settings {
         private String getName(){
             return this.name;
         }
+        
+        public Instituition getIntuition(String instituicao ){
+            
+            switch(instituicao){
+            
+                case "UEFS":
+                    return Instituition.UEFS;
+                case "UNEB":
+                    return Instituition.UNEB;
+                case "UNEF":
+                    return Instituition.UNEF;
+                case "FAT":
+                    return Instituition.FAT;
+                default:
+                    return null;
+            }
+        }
     }
     
     //Complementar com cursos
     public enum Course{
-        ecomp("Engenharia de Computação"),
-        ecivil("Engenharia Civil"),
-        ealim("Engenharia Alimentos");
+        ECOMP("Engenharia de Computação"),
+        ECIVIL("Engenharia Civil"),
+        EALIM("Engenharia Alimentos");
         
         private String name;
         
@@ -68,7 +85,7 @@ public class Settings {
             this.name = name;
         }
         
-        private String getName(){
+        public String getName(){
             return this.name;
         }
         

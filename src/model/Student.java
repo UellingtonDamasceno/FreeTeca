@@ -35,10 +35,8 @@ public class Student extends LogablePerson{
         return login;
     }
 
-    public void setLogin(String email, String recoveryemail, String passsword) {
-        login.setEmail(email);
-        login.setRecoveryEmail(recoveryemail);
-        login.setPassword(passsword);
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     
