@@ -28,7 +28,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black; -fx-opacity: 0.3;" />
             <Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" StackPane.alignment="CENTER_RIGHT">
                <children>
-                  <VBox fx:id="homePanel" alignment="TOP_RIGHT" maxHeight="720.0" maxWidth="426.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" spacing="50.0" styleClass="vbox">
+                  <VBox fx:id="homePanel" alignment="TOP_RIGHT" maxHeight="720.0" maxWidth="426.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" spacing="50.0" style="-fx-background-color: white;" styleClass="vbox">
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="426.0" spacing="10.0">
                            <children>
