@@ -121,7 +121,7 @@ public class StudentDAO {
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
-            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.M : Genere.F;
+            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMENINO;
             String endereco = rs.getString("andress");
             
             Object instituicao = rs.getString("institution");
@@ -176,7 +176,7 @@ public class StudentDAO {
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
-            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.M : Genere.F;
+            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMENINO;
             String endereco = rs.getString("andress");
             
             Object instituicao = rs.getString("institution");

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import util.MaskFieldUtil;
+import util.Settings.Genere;
 import util.Settings.Scenes;
 
 /**
@@ -38,7 +41,7 @@ public class RegisterPersonController implements Initializable {
     @FXML
     private DatePicker dataPiker;
     @FXML
-    private ComboBox<?> cbGenere;
+    private ComboBox<Genere> cbGenere;
     @FXML
     private TextField txtCpf;
     @FXML
@@ -49,7 +52,9 @@ public class RegisterPersonController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.cbGenere.setItems(FXCollections.observableArrayList(Genere.values()));
+        MaskFieldUtil.cpfField(txtCpf);
+        MaskFieldUtil.dateField(dataPiker.getEditor());
     }
 
     @FXML

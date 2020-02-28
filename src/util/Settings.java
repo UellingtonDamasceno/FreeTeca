@@ -96,9 +96,9 @@ public class Settings {
 
     //Complementar com cursos
     public enum Course {
-        ecomp("Engenharia de Computação"),
-        ecivil("Engenharia Civil"),
-        ealim("Engenharia Alimentos");
+        ECOMP("Engenharia de Computação"),
+        ECIVIL("Engenharia Civil"),
+        EALIM("Engenharia Alimentos");
 
         private String name;
 
@@ -113,8 +113,9 @@ public class Settings {
     }
 
     public enum Genere {
-        M("Masculino"),
-        F("Femenino");
+        MASCULINO("M"),
+        FEMENINO("F"),
+        OUTRO("O");
 
         private final String genere;
 
