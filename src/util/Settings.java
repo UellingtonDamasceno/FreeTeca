@@ -56,7 +56,22 @@ public class Settings {
         }
     }
     
+    //Complementar com cursos
     public enum Course{
+        ecomp("Engenharia de Computação"),
+        ecivil("Engenharia Civil"),
+        ealim("Engenharia Alimentos");
+        
+        private String name;
+        
+        private Course(String name){
+            this.name = name;
+        }
+        
+        private String getName(){
+            return this.name;
+        }
+        
         
     }
     

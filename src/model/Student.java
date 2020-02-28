@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 import java.util.Objects;
+import util.Settings;
 import util.Settings.Course;
 import util.Settings.Instituition;
 
@@ -16,7 +17,31 @@ public class Student extends LogablePerson{
     private Instituition institution;
     private String registration;
     private Course course;
+    private Login login;
 
+ 
+    
+    
+
+    public List<String> getPhone() {
+        return phone;
+    }
+
+    public void setPhone(List<String> phone) {
+        this.phone = phone;
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(String email, String recoveryemail, String passsword) {
+        login.setEmail(email);
+        login.setRecoveryEmail(recoveryemail);
+        login.setPassword(passsword);
+    }
+
+    
     public String getRegistration() {
         return registration;
     }

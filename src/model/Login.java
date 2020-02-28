@@ -11,6 +11,10 @@ public class Login {
     private String recoveryEmail;
     private String password;
 
+    public String getPassword() {
+        return password;
+    }
+
     public Login(String email, String recoveryEmail, String password) {
         this.email = email;
         this.recoveryEmail = recoveryEmail;
