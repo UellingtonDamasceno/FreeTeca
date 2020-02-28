@@ -70,6 +70,57 @@ public class Settings {
 
         public String getImagePath() {
             return this.ORIGIN + this.name + this.EXTENSION;
+
+        }
+    }
+
+    public enum Instituition {
+        UEFS("Universidade Estaudal de Feira de Santana"),
+        UNEB("Universidade do Estado da Baiha"),
+        UNEF("Universidade de Ensino Superior de Feira de Santana"),
+        FAT("Faculdade Anisio Texeira");
+
+        private String name;
+
+        private Instituition(String name) {
+            this.name = name;
+        }
+
+        private String getName() {
+            return this.name;
+        }
+    }
+
+    //Complementar com cursos
+    public enum Course {
+        ecomp("Engenharia de Computação"),
+        ecivil("Engenharia Civil"),
+        ealim("Engenharia Alimentos");
+
+        private String name;
+
+        private Course(String name) {
+            this.name = name;
+        }
+
+        private String getName() {
+            return this.name;
+        }
+
+    }
+
+    public enum Genere {
+        M("Masculino"),
+        F("Femenino");
+
+        private final String genere;
+
+        private Genere(String genere) {
+            this.genere = genere;
+        }
+
+        public String getGenere() {
+            return this.genere;
         }
     }
 }

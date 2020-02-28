@@ -7,3 +7,5 @@ build.xml
 manifest.mf
 /build/
 /dist/
+/FreeTeca/build/
+/FreeTeca/dist/
