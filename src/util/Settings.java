@@ -13,7 +13,10 @@ public class Settings {
     Utilizadas.
      */
     public enum Scenes {
-        MAIN("Main.fxml", "Inicio", false);
+        MAIN("Main.fxml", "Inicio", false),
+        HOME_SIDE("123", "", true),
+        REGISTER_PERSON("RegisterPerson.fxml", "Registro", true),
+        REGISTER_LOGIN("RegisterLogin.fxml", "Login", true);
 
         private final String name;
         private final String title;

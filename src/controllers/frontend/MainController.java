@@ -6,17 +6,17 @@
 package controllers.frontend;
 
 import controllers.backend.AudioController;
+import facade.FacadeFrontend;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,8 +25,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.Settings.Scenes;
 import util.Settings.Slider;
 
 /**
@@ -38,8 +40,6 @@ public class MainController implements Initializable {
 
     @FXML
     private ImageView imageViewSlider;
-    @FXML
-    private StackPane stackPane;
     @FXML
     private ToggleButton btnAccessbility;
     @FXML
@@ -56,14 +56,13 @@ public class MainController implements Initializable {
     private Button btnEntry;
 
     private AudioController audioController;
-    private boolean activated;
 
     @FXML
     private VBox homePanel;
     @FXML
-    private VBox registerPane;
+    private HBox hBoxGit;
     @FXML
-    private Button btnTeste;
+    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -72,8 +71,6 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.audioController = new AudioController();
         this.imageViewSlider.setImage(new Image(Slider.FIRST.getImagePath()));
-        this.activated = true;        
-        
         this.initialize();
     }
 
@@ -105,23 +102,21 @@ public class MainController implements Initializable {
 //        }
     }
 
-    @FXML
-    private void changeTop() {
-        ObservableList<Node> childs = this.stackPane.getChildren();
-
-        if (childs.size() > 1) {
-            
-            Node topNode = childs.get(childs.size() - 1);
-            
-            Node newTopNode = childs.get(childs.size() - 2);
-
-            topNode.setVisible(false);
-            topNode.toBack();
-
-            newTopNode.setVisible(true);
-        }
-    }
-
+//    private void changeTop() {
+//        ObservableList<Node> childs = this.stackPane.getChildren();
+//
+//        if (childs.size() > 1) {
+//            
+//            Node topNode = childs.get(childs.size() - 1);
+//            
+//            Node newTopNode = childs.get(childs.size() - 2);
+//
+//            topNode.setVisible(false);
+//            topNode.toBack();
+//
+//            newTopNode.setVisible(true);
+//        }
+//    }
     private void playAudio(String character) {
         if (this.btnAccessbility.selectedProperty().get()) {
             audioController.playAudio(character + "");
@@ -134,6 +129,32 @@ public class MainController implements Initializable {
 
     @FXML
     private void openRegister(MouseEvent event) {
+        this.changeSideBar(Scenes.REGISTER_PERSON);
+    }
+
+    public void changeSideBar(Scenes scene) {
+        try {
+            Parent loadedScreen = FacadeFrontend.getInstance().getScreen(scene);
+            Parent removedScreen = (Parent) this.paneRoot.getChildren().remove(0);
+            FacadeFrontend.getInstance().addScreen(Scenes.HOME_SIDE, removedScreen);
+            this.paneRoot.getChildren().add(loadedScreen);
+        } catch (Exception ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void hide(MouseEvent event) {
+        Platform.runLater(() -> {
+            this.hBoxGit.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void show(MouseEvent event) {
+        Platform.runLater(() -> {
+            this.hBoxGit.setVisible(true);
+        });
     }
 
 }

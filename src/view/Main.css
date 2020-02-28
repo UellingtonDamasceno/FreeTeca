@@ -107,6 +107,16 @@ and open the template in the editor.
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 100;
+}
+
+.image-view-backgroung{
+    -fx-opacity: 0.55;
+}
+
+.vbox{
+    -fx-background-color: lightgray;
+    -fx-background-radius: 25;
 }
 
 /* 
@@ -128,10 +138,10 @@ and open the template in the editor.
 
 .button-image{
     -fx-padding: 5 10 5 10;   
-    -fx-border-color: #ffffff;
+    -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;

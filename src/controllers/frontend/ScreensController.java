@@ -34,12 +34,10 @@ public class ScreensController {
         return this.getScreen(scene);
     }
 
-    public void addScreen(Scenes scene, Parent content) throws Exception {
-        if (scene != null && content != null) {
+    public void addScreen(Scenes scene, Parent content) {
+        if (scene != null && content != null && !this.allScreens.containsKey(scene)) {
             allScreens.put(scene, content);
-        } else {
-            throw new Exception("Id ou Conteudo nulo");
-        }
+        } 
     }
 
     public Parent getScreen(Scenes scene) throws Exception {
