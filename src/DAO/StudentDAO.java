@@ -222,7 +222,7 @@ public class StudentDAO {
     }
 =======
 	
-	private int matricula;
+	/*private int matricula;
 	private String nome;
 	private String email;
 	public int getMatricula() {
@@ -242,7 +242,7 @@ public class StudentDAO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}*/
     
 >>>>>>> ef1494589d7b81d046e41573f7c968344f492083
 }
