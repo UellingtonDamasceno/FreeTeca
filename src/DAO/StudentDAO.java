@@ -6,7 +6,7 @@ package DAO;
  */
 public class StudentDAO {
 	
-	private int matricula;
+	/*private int matricula;
 	private String nome;
 	private String email;
 	public int getMatricula() {
@@ -26,6 +26,6 @@ public class StudentDAO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}*/
     
 }
