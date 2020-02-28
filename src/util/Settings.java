@@ -54,23 +54,7 @@ public class Settings {
         private String getName(){
             return this.name;
         }
-        
-        public Instituition getIntuition(String instituicao ){
-            
-            switch(instituicao){
-            
-                case "UEFS":
-                    return Instituition.UEFS;
-                case "UNEB":
-                    return Instituition.UNEB;
-                case "UNEF":
-                    return Instituition.UNEF;
-                case "FAT":
-                    return Instituition.FAT;
-                default:
-                    return null;
-            }
-        }
+             
     }
     
     //Complementar com cursos
