@@ -80,4 +80,9 @@ public class Student extends LogablePerson{
         }
         return false;
     }
+    
+    @Override
+    public String toString(){
+        return this.cpf + " <> " + this.firstName;
+    }
 }

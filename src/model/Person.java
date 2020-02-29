@@ -8,7 +8,7 @@ import util.Settings.Genere;
  * @author Uellington Conceição
  */
 public abstract class Person {
-
+    
     protected String firstName;
     protected String lastName;
     protected Date birth;

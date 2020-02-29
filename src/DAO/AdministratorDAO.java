@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Administrator;
 import model.Login;
-import model.Student;
 import util.Settings;
 
 /**
@@ -110,7 +109,7 @@ public class AdministratorDAO {
        
         while (rs.next()) {
             
-            String firstName = rs.getString("firsName");
+            String firstName = rs.getString("firtsName");
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
@@ -130,6 +129,8 @@ public class AdministratorDAO {
             
             admin.setFirstName(firstName);
             admin.setLastName(lastName);
+            admin.setCpf(CPF);
+            admin.setGenere(genero);
             admin.setAddress(endereco);
             
             
@@ -156,7 +157,7 @@ public class AdministratorDAO {
             rs = stmt.executeQuery();
           
             if (rs.next()) {
-                String firstName = rs.getString("firsName");
+                String firstName = rs.getString("firtsName");
                 String lastName = rs.getString("lastName");
 
                 String CPF = rs.getString("cpf");
@@ -175,6 +176,8 @@ public class AdministratorDAO {
             
                 admin.setFirstName(firstName);
                 admin.setLastName(lastName);
+                admin.setCpf(CPF);
+                admin.setGenere(genero);
                 admin.setAddress(endereco);
 
 

@@ -118,7 +118,7 @@ public class StudentDAO {
        
         while (rs.next()) {
             
-            String firstName = rs.getString("firsName");
+            String firstName = rs.getString("firstName");
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
@@ -144,7 +144,10 @@ public class StudentDAO {
             
             aluno.setFirstName(firstName);
             aluno.setLastName(lastName);
+            aluno.setCpf(CPF);
+            aluno.setGenere(genero);
             aluno.setAddress(endereco);
+            
             
             aluno.setInstitution(Instituition.valueOf(instituicao));
 
@@ -175,7 +178,7 @@ public class StudentDAO {
             rs = stmt.executeQuery();
           
             if (rs.next()) {
-                String firstName = rs.getString("firsName");
+                String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
 
                 String CPF = rs.getString("cpf");
@@ -201,6 +204,8 @@ public class StudentDAO {
 
                 aluno.setFirstName(firstName);
                 aluno.setLastName(lastName);
+                aluno.setCpf(CPF);
+                aluno.setGenere(genero);
                 aluno.setAddress(endereco);
             
                 
