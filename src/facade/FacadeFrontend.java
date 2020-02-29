@@ -45,11 +45,6 @@ public class FacadeFrontend {
         return this.screensController.loadScreen(scene);
     }
 
-//    public void changeScreenAndSetController(Scenes scene) throws IOException{
-//        FXMLLoader loaderFXML = this.screensController.getLoaderFXML(scene);
-//        Parent loadedScreen = loaderFXML.load();
-//        this.stageController.changeMainStage(scene.getTitle(), loadedScreen);
-//    }
     public double getStageHeigth() {
         return this.stageController.getStageY();
     }
@@ -70,5 +65,8 @@ public class FacadeFrontend {
     public void changeSideBar(Scenes scene) {
         this.mainController.changeSideBar(scene);
     }
-
+    
+    public FXMLLoader getLoaderScreen(Scenes scene){
+        return this.screensController.getLoaderFXML(scene);
+    }
 }

@@ -16,8 +16,11 @@ public class Settings {
         MAIN("Main.fxml", "Inicio", false),
         HOME_SIDE("123", "", true),
         REGISTER_PERSON("RegisterPerson.fxml", "Registro", true),
-        REGISTER_LOGIN("RegisterLogin.fxml", "Login", true);
-
+        REGISTER_LOGIN("RegisterLogin.fxml", "Login", true),
+        DASHBOARD("DashBoard.fxml","Dash", false),
+        ITEM_LIST("ItemList.fxml", "Item", true),
+        LIST("List.fxml", "List", true);
+        
         private final String name;
         private final String title;
         private final boolean cache;
@@ -118,7 +121,6 @@ public class Settings {
         OUTRO("O");
 
         private final String genere;
-
         private Genere(String genere) {
             this.genere = genere;
         }

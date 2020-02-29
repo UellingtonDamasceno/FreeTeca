@@ -137,4 +137,13 @@ public class MainController implements Initializable {
         });
     }
 
+    @FXML
+    private void login(ActionEvent event) {
+        try {
+            FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+        } catch (Exception ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

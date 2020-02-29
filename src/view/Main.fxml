@@ -120,7 +120,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Button fx:id="btnEntry" mnemonicParsing="false" prefHeight="33.0" prefWidth="86.0" stylesheets="@Main.css" text="Entrar">
+                                    <Button fx:id="btnEntry" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="86.0" stylesheets="@Main.css" text="Entrar">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
