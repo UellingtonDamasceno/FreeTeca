@@ -95,6 +95,7 @@ public class Settings {
         private String getName() {
             return this.name;
         }
+             
     }
 
     //Complementar com cursos
@@ -103,13 +104,14 @@ public class Settings {
         ECIVIL("Engenharia Civil"),
         EALIM("Engenharia Alimentos");
 
+
         private String name;
 
         private Course(String name) {
             this.name = name;
         }
-
-        private String getName() {
+        
+        public String getName(){
             return this.name;
         }
 
