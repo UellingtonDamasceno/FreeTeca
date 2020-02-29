@@ -20,9 +20,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Connection connection = ConnectionFactory.getConnection();
+//            Connection connection = ConnectionFactory.getConnection();
 
-            StudentDAO sd = new StudentDAO();
+//            StudentDAO sd = new StudentDAO();
 
 //            for (int i = 0; i < 10; i++) {
 //
@@ -42,9 +42,9 @@ public class Main extends Application {
 //            }
 //            
 //            Student s2 = new Student();
-            LinkedList students = sd.read();
+//            LinkedList students = sd.read();
 
-            System.out.println(students);
+//            System.out.println(students);
 
             FacadeFrontend.getInstance().initialize(primaryStage, Settings.Scenes.MAIN);
         } catch (Exception ex) {

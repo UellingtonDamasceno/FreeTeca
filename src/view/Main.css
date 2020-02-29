@@ -9,9 +9,13 @@ and open the template in the editor.
 */
 
 .background {
-    -fx-background-color: #ffffff;
+    -fx-background-color:white;
 }
 
+.background-card {
+    -fx-background-color:lightgray;
+    -fx-background-radius: 10;
+}
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -43,15 +47,22 @@ and open the template in the editor.
 .label-title {
     -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #lblblb;
+    -fx-text-fill: #1d1d1d;
     -fx-opacity: 0.6;
 }
 
 .label-info {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #lblblb;
+    -fx-text-fill: #1d1d1d;
     -fx-opacity: 0.6;
+}
+
+.label-dashname{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #1d1d1d;
+    -fx-opacity: 0.6;    
 }
 
 .table-view {
@@ -151,49 +162,12 @@ and open the template in the editor.
     -fx-background-insets: 0 0 0 0, 0, 1, 2;    
 }
 
-.button-image{
-    -fx-padding: 5 10 5 10;   
-    -fx-border-color: transparent;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-    
-}
-
-.button-cancel {
-    -fx-padding: 5 10 5 10;   
-    -fx-border-color: #ffffff;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: red;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;    
-}
-
-.button-confirm {
-    -fx-padding: 5 10 5 10;   
-    -fx-border-color: #ffffff;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: yellow;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;    
-}
-
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #67BEEC;
+    -fx-opacity: 0.8;
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: white;
     -fx-text-fill: #1d1d1d;
 }
 
@@ -218,4 +192,51 @@ and open the template in the editor.
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.button-image{
+    -fx-padding: 5 10 5 10;   
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+
+}
+
+.button-image:hover {
+    -fx-background-color: transparent;
+    -fx-opacity: 0.4;
+}
+
+.button-cancel {
+    -fx-padding: 5 10 5 10;   
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: red;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;    
+}
+
+.button-cancel:hover {
+    -fx-background-color: red;
+    -fx-opacity: 0.4;
+}
+
+.button-confirm {
+    -fx-padding: 5 10 5 10;   
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: yellow;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;    
 }

@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.DashBoardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.DashBoardController">
    <center>
       <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <BorderPane prefWidth="635.0">
+            <BorderPane prefWidth="628.0">
                <center>
-                  <VBox fx:id="vboxRoot" alignment="CENTER" prefWidth="628.0" spacing="5.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="vboxRoot" alignment="CENTER" prefWidth="628.0" spacing="10.0" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets top="10.0" />
                      </BorderPane.margin>
@@ -30,38 +30,50 @@
    <left>
       <VBox prefHeight="720.0" prefWidth="226.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="92.0" prefWidth="226.0">
+            <VBox alignment="CENTER" prefHeight="185.0" prefWidth="226.0">
                <children>
-                  <ImageView fx:id="imageViewUser" fitHeight="125.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageViewUser" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/icons/admin.png" />
                      </image></ImageView>
-                  <Label fx:id="lblName" prefHeight="20.0" prefWidth="217.0" text="Bem vindo, Uellington Damasceno">
+                  <Label fx:id="lblName" alignment="CENTER" prefHeight="20.0" prefWidth="230.0" styleClass="label-dashname">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="630.0" prefWidth="220.0" spacing="25.0" stylesheets="@Main.css">
+            <VBox alignment="CENTER" prefHeight="630.0" prefWidth="220.0" spacing="30.0">
                <children>
-                  <Button fx:id="btnManager" mnemonicParsing="false" prefHeight="108.0" prefWidth="235.0" text="Gerenciar Estudantes">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button fx:id="btnEdit" mnemonicParsing="false" prefHeight="108.0" prefWidth="235.0" text="Editar Informações">
+                  <Button fx:id="btnManager" mnemonicParsing="false" prefHeight="108.0" prefWidth="215.0" text="Gerenciar Estudantes">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button fx:id="btnEdit" mnemonicParsing="false" prefHeight="108.0" prefWidth="215.0" text="Editar Informações">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnList" mnemonicParsing="false" prefHeight="108.0" prefWidth="235.0" text="Listar Estudantes">
+                  <Button fx:id="btnList" mnemonicParsing="false" prefHeight="108.0" prefWidth="215.0" text="Listar Estudantes">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnLeave" mnemonicParsing="false" prefHeight="108.0" prefWidth="235.0" text="Sair">
+                  <Button fx:id="btnLeave" mnemonicParsing="false" prefHeight="108.0" prefWidth="215.0" text="Sair">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
                </children></VBox>
          </children>

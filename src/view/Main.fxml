@@ -92,14 +92,26 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="380.0" spacing="10.0">
                                  <children>
                                     <Label text="Senha">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="344.0" styleClass="text-field" />
+                                    <VBox minHeight="-Infinity" prefHeight="39.0" prefWidth="343.0">
+                                       <children>
+                                          <PasswordField fx:id="txtPassword" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="343.0" styleClass="text-field" />
+                                          <ImageView fx:id="imgEye" fitHeight="30.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" translateX="306.0" translateY="-33.0">
+                                             <image>
+                                                <Image url="@../resources/icons/closed_eye.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <padding>
                                     <Insets left="10.0" />
