@@ -11,63 +11,64 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" styleClass="vbox" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.RegisterPersonController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="426.0" styleClass="vbox" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.RegisterPersonController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Primeiro nome">
+                  <VBox prefHeight="63.0" prefWidth="212.0" spacing="5.0">
+                     <children>
+                        <Label text="Primeiro nome">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtFirstName" prefHeight="37.0" prefWidth="415.0" styleClass="text-field" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="63.0" prefWidth="210.0" spacing="5.0">
+                     <children>
+                        <Label text="Ultimo nome">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtLastName" prefHeight="37.0" prefWidth="139.0" styleClass="text-field" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="94.0" text="Nascimento">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFirstName" prefHeight="37.0" prefWidth="277.0" styleClass="text-field" />
+                  <DatePicker fx:id="dataPiker" prefHeight="37.0" prefWidth="405.0" />
                </children>
                <padding>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
-               <children>
-                  <Label text="Ultimo nome">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtLastName" prefHeight="37.0" prefWidth="289.0" styleClass="text-field" />
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
-               <children>
-                  <Label prefHeight="30.0" prefWidth="85.0" text="Nascimento">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dataPiker" prefHeight="37.0" prefWidth="290.0" />
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label text="Gênero">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbGenere" prefHeight="25.0" prefWidth="330.0" />
+                  <ComboBox fx:id="cbGenere" prefHeight="25.0" prefWidth="402.0" />
                </children>
                <padding>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label text="CPF">
                      <font>
@@ -77,10 +78,10 @@
                   <TextField fx:id="txtCpf" prefHeight="37.0" prefWidth="353.0" styleClass="text-field" />
                </children>
                <padding>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label text="Endereço">
                      <font>
@@ -90,9 +91,9 @@
                   <TextField fx:id="txtAddress" prefHeight="37.0" prefWidth="314.0" styleClass="text-field" />
                </children>
                <padding>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </padding>
-            </HBox>
+            </VBox>
             <Label fx:id="lblInfo" prefHeight="36.0" prefWidth="366.0" />
          </children>
       </VBox>
