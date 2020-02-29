@@ -23,7 +23,7 @@ import util.Settings.Instituition;
 public class StudentDAO {
 <<<<<<< HEAD
 
-
+    //criacao de um estudande no banco de dados
     public boolean create(Student a) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -89,7 +89,7 @@ public class StudentDAO {
         }
     }
 
-    // chave primaria/ pesquisa é o registro
+    // chave primaria/ pesquisa para o registro
     public boolean delete(Student a) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
