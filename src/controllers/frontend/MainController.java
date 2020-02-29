@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import util.MaskFieldUtil;
+import util.Settings;
 import util.Settings.Scenes;
 import util.Settings.Slider;
 
@@ -59,7 +60,10 @@ public class MainController implements Initializable {
     private Pane paneRoot;
 
     private boolean activated;
-
+    @FXML
+    private ImageView imgEye;
+    
+    private boolean eye;
     /**
      * Initializes the controller class.
      */
@@ -67,9 +71,10 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         MaskFieldUtil.reproducer(txtEmail);
         this.activated = false;
+        this.eye = true;
         this.imageViewSlider.setImage(new Image(Slider.FIRST.getImagePath()));
         this.setAllBinds();
-        this.startSlide();
+//        this.startSlide();
     }
 
     private void setAllBinds() {
@@ -77,6 +82,34 @@ public class MainController implements Initializable {
             if (newValue) {
                 AudioController.getInstance().setCanReproduce(newValue);
             }
+        });
+        
+        imgEye.setOnMouseEntered((event) -> {
+            if (eye) {
+                this.imgEye.setImage(new Image(Settings.Icons.SLEEPY_EYE.getIconPath()));
+            }
+        });
+        imgEye.setOnMouseExited((event) -> {
+            if (eye) {
+                this.imgEye.setImage(new Image(Settings.Icons.CLOSED_EYE.getIconPath()));
+            }
+        });
+
+        imgEye.setOnMouseClicked((event) -> {
+            if (eye) {
+                this.imgEye.setImage(new Image(Settings.Icons.EYE.getIconPath()));
+            } else {
+                new Thread(() -> {
+                    this.imgEye.setImage(new Image(Settings.Icons.SLEEPY_EYE.getIconPath()));
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(RegisterLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.imgEye.setImage(new Image(Settings.Icons.CLOSED_EYE.getIconPath()));
+                }).start();
+            }
+            this.eye = !this.eye;
         });
     }
 

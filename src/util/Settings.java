@@ -17,6 +17,7 @@ public class Settings {
         HOME_SIDE("123", "", true),
         REGISTER_PERSON("RegisterPerson.fxml", "Registro", true),
         REGISTER_LOGIN("RegisterLogin.fxml", "Login", true),
+        REGISTER_ACADEMY("RegisterAcademy.fxml", "Academy", true),
         DASHBOARD("DashBoard.fxml","Dash", false),
         ITEM_LIST("ItemList.fxml", "Item", true),
         LIST("List.fxml", "List", true);
@@ -46,8 +47,11 @@ public class Settings {
     }
 
     public enum Icons {
-        BOOKS("books");
-
+        BOOKS("books"),
+        CLOSED_EYE("closed_eye"),
+        SLEEPY_EYE("sleepy_eye"),
+        EYE("eye");
+        
         private final String name;
         private final String ORIGIN = "/resources/icons/";
         private final String EXTENSION = ".png";
@@ -95,6 +99,7 @@ public class Settings {
         private String getName() {
             return this.name;
         }
+             
     }
 
     //Complementar com cursos
@@ -103,13 +108,14 @@ public class Settings {
         ECIVIL("Engenharia Civil"),
         EALIM("Engenharia Alimentos");
 
+
         private String name;
 
         private Course(String name) {
             this.name = name;
         }
-
-        private String getName() {
+        
+        public String getName(){
             return this.name;
         }
 
@@ -117,7 +123,7 @@ public class Settings {
 
     public enum Genere {
         MASCULINO("M"),
-        FEMENINO("F"),
+        FEMININO("F"),
         OUTRO("O");
 
         private final String genere;

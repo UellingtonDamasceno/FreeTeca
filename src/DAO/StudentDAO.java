@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Login;
 import model.Student;
 import util.Settings.Course;
 import util.Settings.Genere;
@@ -115,19 +116,19 @@ public class StudentDAO {
        
         while (rs.next()) {
             
-            String firstName = rs.getString("firsName");
+            String firstName = rs.getString("firstName");
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
-            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMENINO;
+            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMININO;
             String endereco = rs.getString("andress");
             
-            Object instituicao = rs.getString("institution");
+            String instituicao = rs.getString("institution");
             
                     
-            Object curso = rs.getString("course");
+            String curso = rs.getString("course");
             
-            Object matricula =  rs.getString("registration");
+            String matricula =  rs.getString("registration");
             
             String email = rs.getString("email");
             
@@ -141,15 +142,20 @@ public class StudentDAO {
             
             aluno.setFirstName(firstName);
             aluno.setLastName(lastName);
+            aluno.setCpf(CPF);
+            aluno.setGenere(genero);
             aluno.setAddress(endereco);
             
-            aluno.setInstitution((Instituition) instituicao);
             
-            aluno.setCourse((Course) curso);
+            aluno.setInstitution(Instituition.valueOf(instituicao));
+
+            aluno.setCourse(Course.valueOf(curso));
             
-            aluno.setRegistration((String) matricula);
+            aluno.setRegistration(matricula);
             
-            aluno.setLogin(email, recoveryemail, password);
+           Login ls = new Login(email, recoveryemail, password);
+           
+           aluno.setLogin(ls);
             
             
             
@@ -170,41 +176,48 @@ public class StudentDAO {
             rs = stmt.executeQuery();
           
             if (rs.next()) {
-               String firstName = rs.getString("firsName");
-            String lastName = rs.getString("lastName");
+
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+
+                String CPF = rs.getString("cpf");
+                Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO: Genere.FEMININO;
+                String endereco = rs.getString("andress");
+
+                String instituicao = rs.getString("institution");
+
+
+                String curso = rs.getString("course");
+
+                String matricula =  rs.getString("registration");
+
+                String email = rs.getString("email");
+
+                String recoveryemail = rs.getString("recoveryemail");
+
+                String password = rs.getString("password");
+
+
+
+                aluno = new Student();
+
+                aluno.setFirstName(firstName);
+                aluno.setLastName(lastName);
+                aluno.setCpf(CPF);
+                aluno.setGenere(genero);
+                aluno.setAddress(endereco);
+
             
-            String CPF = rs.getString("cpf");
-            Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMENINO;
-            String endereco = rs.getString("andress");
-            
-            Object instituicao = rs.getString("institution");
-            
-                    
-            Object curso = rs.getString("course");
-            
-            Object matricula =  rs.getString("registration");
-            
-            String email = rs.getString("email");
-            
-            String recoveryemail = rs.getString("recoveryemail");
-            
-            String password = rs.getString("password");
-            
-            
-            
-            aluno = new Student();
-            
-            aluno.setFirstName(firstName);
-            aluno.setLastName(lastName);
-            aluno.setAddress(endereco);
-            
-            aluno.setInstitution((Instituition) instituicao);
-            
-            aluno.setCourse((Course) curso);
-            
-            aluno.setRegistration((String) matricula);
-            
-            aluno.setLogin(email, recoveryemail, password);
+                
+               aluno.setInstitution(Instituition.valueOf(instituicao));
+
+               aluno.setCourse(Course.valueOf(curso));
+
+                aluno.setRegistration(matricula);
+
+                Login ls = new Login(email, recoveryemail, password);
+
+                aluno.setLogin(ls);
                 
             } else {
                 throw new RuntimeException("A pesquisa não retronou nenhum resultado!");
@@ -218,3 +231,4 @@ public class StudentDAO {
         return aluno;
     }	
 }
+    

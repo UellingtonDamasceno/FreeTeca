@@ -44,9 +44,9 @@ public class DashBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.initialize();
-    }    
-    
-    private void initialize(){
+    }
+
+    private void initialize() {
         try {
             Parent loadedScreen = FacadeFrontend.getInstance().getScreen(Scenes.LIST);
             this.vboxRoot.getChildren().add(loadedScreen);

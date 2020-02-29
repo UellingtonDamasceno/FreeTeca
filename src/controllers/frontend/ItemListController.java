@@ -20,7 +20,7 @@ import util.Settings.Icons;
  *
  * @author acmne
  */
-public class ItenListController implements Initializable {
+public class ItemListController implements Initializable {
 
     @FXML
     private ImageView imgIcon;
