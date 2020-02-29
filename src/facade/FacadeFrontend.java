@@ -1,7 +1,9 @@
 package facade;
 
+import controllers.frontend.MainController;
 import controllers.frontend.ScreensController;
 import controllers.frontend.StageController;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import util.Settings.Scenes;
@@ -16,7 +18,8 @@ public class FacadeFrontend {
 
     private ScreensController screensController;
     private StageController stageController;
-    
+    private MainController mainController;
+
     private FacadeFrontend() {
         this.screensController = new ScreensController();
     }
@@ -26,8 +29,9 @@ public class FacadeFrontend {
     }
 
     public void initialize(Stage stage, Scenes scene) throws Exception {
-        Parent loadedScreen = this.screensController.loadScreen(scene);
-
+        FXMLLoader loaderFXML = this.screensController.getLoaderFXML(scene);
+        Parent loadedScreen = loaderFXML.load();
+        this.mainController = loaderFXML.getController();
         this.stageController = new StageController(stage);
         this.stageController.changeMainStage(scene.getTitle(), loadedScreen);
     }
@@ -37,23 +41,34 @@ public class FacadeFrontend {
         this.stageController.changeMainStage(scene.getTitle(), loadedScreen);
     }
 
+    public Parent getScreen(Scenes scene) throws Exception {
+        return this.screensController.loadScreen(scene);
+    }
+
 //    public void changeScreenAndSetController(Scenes scene) throws IOException{
 //        FXMLLoader loaderFXML = this.screensController.getLoaderFXML(scene);
 //        Parent loadedScreen = loaderFXML.load();
 //        this.stageController.changeMainStage(scene.getTitle(), loadedScreen);
 //    }
-    
-    public double getStageHeigth(){
+    public double getStageHeigth() {
         return this.stageController.getStageY();
     }
-    
-    public double getStageWidth(){
+
+    public double getStageWidth() {
         return this.stageController.getStageX();
     }
-    
+
     public void showContentAuxStage(Scenes scene, String name) throws Exception {
         Parent content = this.screensController.loadScreen(scene);
         this.stageController.changeStageContent(name, scene.getTitle(), content);
     }
-    
+
+    public void addScreen(Scenes scene, Parent parent) {
+        this.screensController.addScreen(scene, parent);
+    }
+
+    public void changeSideBar(Scenes scene) {
+        this.mainController.changeSideBar(scene);
+    }
+
 }

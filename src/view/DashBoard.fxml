@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.frontend.DashBoardController">
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox prefHeight="716.0" prefWidth="820.0" />
+         </content>
+      </ScrollPane>
+   </center>
+   <left>
+      <VBox prefHeight="720.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="92.0" prefWidth="226.0">
+               <children>
+                  <ImageView fx:id="imageViewUser" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icons/admin.png" />
+                     </image></ImageView>
+                  <Label fx:id="lblName" prefHeight="21.0" prefWidth="39.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="632.0" prefWidth="226.0" spacing="50.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Gerenciar Estudantes" />
+                  <Button mnemonicParsing="false" text="Gerenciar Aluguéis" />
+                  <Button mnemonicParsing="false" text="Gerenciar Acervo" />
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button" />
+               </children></VBox>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="720.0" prefWidth="236.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

@@ -1,7 +1,17 @@
 nbproject/
+build/
+dist/
 
 build.xml
 
 manifest.mf
 /build/
 /dist/
+
+/FreeTeca/build/
+/FreeTeca/dist/
+
+/bin/
+
+/.classpath
+/.project

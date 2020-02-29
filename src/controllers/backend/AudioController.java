@@ -15,7 +15,7 @@ public class AudioController {
 
     private static final String ORIGIN = "/resources/audio/";
     private static final String EXTENSION = ".wav";
-    private static final String INVALID = ORIGIN + "INVALIDO.WAV" + EXTENSION;
+    private static final String INVALID = ORIGIN + "INVALIDO" + EXTENSION;
 
     private final Map<String, AudioClip> audios;
     private final Set<String> invalidAudios;
