@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.frontend;
 
 import facade.FacadeFrontend;
@@ -53,6 +48,12 @@ public class RegisterPersonController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.cbGenere.setItems(FXCollections.observableArrayList(Genere.values()));
+        MaskFieldUtil.reproducer(txtCpf);
+        MaskFieldUtil.reproducer(dataPiker.getEditor());
+        MaskFieldUtil.reproducer(txtFirstName);
+        MaskFieldUtil.reproducer(txtLastName);
+        MaskFieldUtil.reproducer(txtAddress);
+        
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(dataPiker.getEditor());
     }

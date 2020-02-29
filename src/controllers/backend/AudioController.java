@@ -13,6 +13,8 @@ import javafx.scene.media.AudioClip;
  */
 public class AudioController {
 
+    private static AudioController controller;
+    
     private static final String ORIGIN = "/resources/audio/";
     private static final String EXTENSION = ".wav";
     private static final String INVALID = ORIGIN + "INVALIDO" + EXTENSION;
@@ -21,22 +23,39 @@ public class AudioController {
     private final Set<String> invalidAudios;
     private final AudioClip invalid;
 
-    public AudioController() {
+    private boolean canReproduce;
+
+    private AudioController() {
         this.audios = new HashMap();
         this.invalidAudios = new HashSet();
         this.invalid = this.loadAudio(INVALID);
+        this.canReproduce = false;
+    }
+
+    public static synchronized AudioController getInstance(){
+        return (controller == null) ? controller = new AudioController() : controller;
+    }
+    
+    public void setCanReproduce(boolean canReproduce){
+        this.canReproduce = canReproduce;
     }
 
     private String getDirectoryFile(String character) {
         return ORIGIN + character + EXTENSION;
     }
-
+    
+    public void playAudio(char id){
+        this.playAudio(String.valueOf(id));
+    }
+    
     public void playAudio(String id) {
-        id = id.toUpperCase();
-        try {
-            this.getAudio(id).play();
-        } catch (NotFoundException ex) {
-            this.addAudio(id).play();
+        if (canReproduce) {
+            id = id.toUpperCase();
+            try {
+                this.getAudio(id).play();
+            } catch (NotFoundException ex) {
+                this.addAudio(id).play();
+            }
         }
     }
 

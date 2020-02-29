@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Person;
 import model.Student;
 import util.Settings.Course;
 import util.Settings.Genere;
@@ -21,7 +20,6 @@ import util.Settings.Instituition;
  * @author Uellington Damasceno
  */
 public class StudentDAO {
-
     //criacao de um estudande no banco de dados
     public boolean create(Student a) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
