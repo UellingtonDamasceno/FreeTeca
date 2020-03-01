@@ -50,6 +50,8 @@ public class Settings {
         BOOKS("books"),
         CLOSED_EYE("closed_eye"),
         SLEEPY_EYE("sleepy_eye"),
+        USER_MALE("circled_male"),
+        USER_FEMALE("circled_female"),
         EYE("eye");
 
         private final String name;

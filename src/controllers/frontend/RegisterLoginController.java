@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.frontend;
 
 import controllers.backend.NotificationsController;
@@ -138,18 +133,12 @@ public class RegisterLoginController implements Initializable {
         try {
             try {
                 ValidationController.getInstance().registerLogin(txtEmail.getText(), txtPassword.getText(), txtPassword1.getText(), txtRecoveryEmail.getText());
+                FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.REGISTER_ACADEMY);
             } catch (PasswordWrongException ex) {
                 NotificationsController.getInstance().infoNotification("Senhas diferentes", ex.getMessage());
             }
         } catch (MissingValuesException ex) {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
-        
-        try {            
-            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.REGISTER_ACADEMY);
-        } catch (Exception ex) {
-            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
-
 }

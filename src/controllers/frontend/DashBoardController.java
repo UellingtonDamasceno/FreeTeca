@@ -5,16 +5,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import model.Person;
+import util.Settings.Genere;
+import util.Settings.Icons;
 import util.Settings.Scenes;
 
 /**
@@ -58,6 +62,19 @@ public class DashBoardController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void intialize(Person person) {
+        System.out.println(person);
+        Platform.runLater(() -> {
+            Image image;
+            image = (person.getGenere() == Genere.MASCULINO)
+                    ? new Image(Icons.USER_MALE.getIconPath())
+                    : new Image(Icons.USER_FEMALE.getIconPath());
+
+            this.imageViewUser.setImage(image);
+            this.lblName.setText("Bem-vindo, " + person.getFirstName());
+        });
     }
 
     public void changeCenter(Scenes scene) {

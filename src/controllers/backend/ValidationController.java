@@ -5,11 +5,14 @@
  */
 package controllers.backend;
 
+import DAO.AdministratorDAO;
 import DAO.StudentDAO;
 import java.sql.SQLException;
+import model.LogablePerson;
 import model.Login;
 import model.Student;
 import model.exceptions.MissingValuesException;
+import model.exceptions.NotFoundException;
 import model.exceptions.PasswordWrongException;
 import util.Settings;
 
@@ -30,9 +33,24 @@ public class ValidationController {
         return (validation == null) ? validation = new ValidationController() : validation;
     }
 
+    public LogablePerson login(String email, String password) throws MissingValuesException, SQLException, ClassNotFoundException, NotFoundException {
+        if (email.isEmpty() || password.isEmpty()) {
+            throw new MissingValuesException("Nem todos os campos foram preenchidos!");
+        } else {
+//            try {
+                StudentDAO studentDAO = new StudentDAO();
+                Student student = studentDAO.readStudentForEmail(email);
+                return student;
+//            } catch (NotFoundException ex) {
+//                AdministratorDAO a = new AdministratorDAO();
+//                return a.readAdminForEmail(email);
+//            }
+        }
+    }
+
     public void registerPerson(String firstName, String lastName, String birth, String gender, String cpf, String adress) throws MissingValuesException {
 
-        if (firstName == null || lastName == null || birth == null || gender == null || cpf == null || adress == null) {
+        if (firstName.isEmpty() || lastName.isEmpty() || birth.isEmpty() || gender.isEmpty() || cpf.isEmpty() || adress.isEmpty()) {
             throw new MissingValuesException("Nem todos os campos foram preenchidos!");
         } else {
             temp.setFirstName(firstName);
@@ -40,7 +58,7 @@ public class ValidationController {
             temp.setAddress(adress);
             temp.setBirth(birth);
             temp.setGenere(Settings.Genere.valueOf(gender));
-            
+
             cpf = cpf.replaceAll(".", "");
             cpf = cpf.replaceAll("-", "");
             temp.setCpf(cpf);
@@ -48,7 +66,7 @@ public class ValidationController {
     }
 
     public void registerLogin(String email, String password, String confPassword, String recoveryEmail) throws MissingValuesException, PasswordWrongException {
-        if (email == null || password == null || confPassword == null || recoveryEmail == null) {
+        if (email.isEmpty() || password.isEmpty() || confPassword.isEmpty() || recoveryEmail.isEmpty()) {
             throw new MissingValuesException("Nem todos os campos foram preenchidos!");
         } else {
             if (!password.equals(confPassword)) {
@@ -63,7 +81,7 @@ public class ValidationController {
     }
 
     public void registerAcademy(String institute, String course, String id) throws MissingValuesException {
-        if (institute == null || course == null || id == null) {
+        if (institute.isEmpty() || course.isEmpty() || id.isEmpty()) {
             throw new MissingValuesException("Nem todos os campos foram preenchidos!");
         } else {
             temp.setInstitution(Settings.Instituition.valueOf(institute));
@@ -72,12 +90,10 @@ public class ValidationController {
         }
     }
 
-    public void save() throws ClassNotFoundException, SQLException {
+    public Student save() throws ClassNotFoundException, SQLException {
         StudentDAO ex = new StudentDAO();
-        
         ex.create(temp);
-
-
+        return temp;
     }
 
 }

@@ -1,5 +1,6 @@
 package facade;
 
+import controllers.frontend.DashBoardController;
 import controllers.frontend.ListController;
 import controllers.frontend.MainController;
 import controllers.frontend.ScreensController;
@@ -7,6 +8,7 @@ import controllers.frontend.StageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import model.Person;
 import util.Settings.Scenes;
 
 /**
@@ -21,7 +23,8 @@ public class FacadeFrontend {
     private StageController stageController;
     private MainController mainController;
     private ListController listController;
-
+    private DashBoardController dashboadController;
+    
     private FacadeFrontend() {
         this.screensController = new ScreensController();
     }
@@ -47,6 +50,14 @@ public class FacadeFrontend {
         this.listController = (ListController) controller;
     }
 
+    public void setDashBoardController(Object controller){
+        this.dashboadController = (DashBoardController) controller;
+    }
+    
+    public void setUser(Person person){
+        this.dashboadController.intialize(person);
+    }
+    
     public Parent getScreen(Scenes scene) throws Exception {
         return this.screensController.loadScreen(scene);
     }

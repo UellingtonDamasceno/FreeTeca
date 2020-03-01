@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import model.Student;
 import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
 import util.Settings;
@@ -119,7 +120,8 @@ public class RegisterAcademyController implements Initializable {
         }
 
         try {
-            ValidationController.getInstance().save();
+            Student student = ValidationController.getInstance().save();
+            NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
             FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);

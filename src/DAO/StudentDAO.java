@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Login;
 import model.Student;
+import model.exceptions.NotFoundException;
 import util.Settings.Course;
 import util.Settings.Genere;
 import util.Settings.Instituition;
@@ -156,18 +157,18 @@ public class StudentDAO {
         return alunos;
     }
 
-    public Student readAlunoForCPF(String cpf) throws ClassNotFoundException, SQLException {
+    public Student readStudentForEmail(String email) throws NotFoundException, SQLException, ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Student aluno = null;
         try {
-            stmt = con.prepareStatement("SELECT * FROM alunos WHERE cpf = ?");
-            stmt.setString(1, cpf);
+            stmt = con.prepareStatement("SELECT * FROM alunos WHERE email = ?");
+            stmt.setString(1, email);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-
+                
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
 
@@ -178,7 +179,6 @@ public class StudentDAO {
                 String instituicao = rs.getString("institution");
                 String curso = rs.getString("course");
                 String matricula = rs.getString("registration");
-                String email = rs.getString("email");
                 String recoveryemail = rs.getString("recoveryemail");
                 String password = rs.getString("password");
 
@@ -194,10 +194,11 @@ public class StudentDAO {
                 aluno.setCourse(Course.valueOf(curso));
                 aluno.setRegistration(matricula);
                 Login ls = new Login(email, recoveryemail, password);
+                System.out.println("Login recupreado: "+ ls.getEmail() +" " + ls.getPassword());
                 aluno.setLogin(ls);
 
             } else {
-                throw new RuntimeException("A pesquisa não retronou nenhum resultado!");
+                throw new NotFoundException();
             }
             return aluno;
         } catch (SQLException ex) {

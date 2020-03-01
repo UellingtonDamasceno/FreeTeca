@@ -1,6 +1,8 @@
 package controllers.frontend;
 
 import controllers.backend.AudioController;
+import controllers.backend.NotificationsController;
+import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.LinkedList;
@@ -10,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -23,6 +26,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import model.LogablePerson;
+import model.exceptions.MissingValuesException;
+import model.exceptions.NotFoundException;
 import util.MaskFieldUtil;
 import util.Settings;
 import util.Settings.Scenes;
@@ -34,7 +40,7 @@ import util.Settings.Slider;
  * @author acmne
  */
 public class MainController implements Initializable {
-
+    
     @FXML
     private ImageView imageViewSlider;
     @FXML
@@ -51,14 +57,14 @@ public class MainController implements Initializable {
     private Label btnRegister;
     @FXML
     private Button btnEntry;
-
+    
     @FXML
     private VBox homePanel;
     @FXML
     private HBox hBoxGit;
     @FXML
     private Pane paneRoot;
-
+    
     private boolean activated;
     @FXML
     private ImageView imgEye;
@@ -66,8 +72,10 @@ public class MainController implements Initializable {
     private boolean eye;
     @FXML
     private ImageView ImageAcessibilidade;
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -80,15 +88,14 @@ public class MainController implements Initializable {
         this.setAllBinds();
 //        this.startSlide();
     }
-
-    
     
     private void setAllBinds() {
-        ImageAcessibilidade.setOnMouseEntered((event) ->{
-            if(!this.btnAccessbility.isSelected())
+        ImageAcessibilidade.setOnMouseEntered((event) -> {
+            if (!this.btnAccessbility.isSelected()) {
                 AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
-            else
+            } else {
                 AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
+            }
             
         });
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -98,9 +105,9 @@ public class MainController implements Initializable {
         });
         this.btnAccessbility.setOnMouseEntered((event) -> {
             AudioController.getInstance().setCanReproduce(true);
-            if (btnAccessbility.isSelected())
+            if (btnAccessbility.isSelected()) {
                 AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
-            else{
+            } else {
                 AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
                 AudioController.getInstance().setCanReproduce(false);
             }
@@ -116,7 +123,7 @@ public class MainController implements Initializable {
                 this.imgEye.setImage(new Image(Settings.Icons.CLOSED_EYE.getIconPath()));
             }
         });
-
+        
         imgEye.setOnMouseClicked((event) -> {
             if (eye) {
                 this.imgEye.setImage(new Image(Settings.Icons.EYE.getIconPath()));
@@ -134,7 +141,7 @@ public class MainController implements Initializable {
             this.eye = !this.eye;
         });
     }
-
+    
     private void startSlide() {
         this.activated = true;
         new Thread(() -> {
@@ -158,17 +165,17 @@ public class MainController implements Initializable {
             }
         }).start();
     }
-
+    
     @FXML
     private void openSettings(ActionEvent event) {
         this.activated = !this.activated;
     }
-
+    
     @FXML
     private void openRegister(MouseEvent event) {
         this.changeSideBar(Scenes.REGISTER_PERSON);
     }
-
+    
     public void changeSideBar(Scenes scene) {
         try {
             Parent loadedScreen = FacadeFrontend.getInstance().getScreen(scene);
@@ -179,70 +186,85 @@ public class MainController implements Initializable {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @FXML
     private void hide(MouseEvent event) {
         Platform.runLater(() -> {
             this.hBoxGit.setVisible(false);
         });
     }
-
+    
     @FXML
     private void show(MouseEvent event) {
         Platform.runLater(() -> {
             this.hBoxGit.setVisible(true);
         });
     }
-
+    
     @FXML
     private void login(ActionEvent event) {
         try {
-            FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+            LogablePerson person = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
+            if (person.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
+                FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.DASHBOARD);
+                Parent loadedScreen = loader.load();
+                Object controller = loader.getController();
+                FacadeFrontend.getInstance().setDashBoardController(controller);
+                FacadeFrontend.getInstance().setUser(person);
+                FacadeFrontend.getInstance().addScreen(Scenes.DASHBOARD, loadedScreen);
+                FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+            } else {
+                NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+            }
+        } catch (MissingValuesException ex) {
+            NotificationsController.getInstance().errorNotification("Campo vazio.", ex.getMessage());
+        } catch (NotFoundException ex) {
+            NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n"+ this.txtEmail.getText());
         } catch (Exception ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @FXML
     private void lblEmailEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
     }
-
+    
     @FXML
     private void lblSenhaEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
     }
-
-
+    
     @FXML
     private void btnConfigEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.CONFIGURACOES.getPhrase());
     }
-
+    
     @FXML
     private void txtEmailEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.INSERIREMAIL.getPhrase());
     }
-
+    
     @FXML
     private void txtSenhaEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.INSERIRSENHA.getPhrase());
     }
-
+    
     @FXML
     private void lblErrorEntered(MouseEvent event) {
-        if(lblInfo.isDisabled())
+        if (lblInfo.isDisabled()) {
             AudioController.getInstance().playAudio(Settings.Phrase.ERROLOGIN.getPhrase());
+        }
     }
-
+    
     @FXML
     private void btnEntrarEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.ENTRAR.getPhrase());
     }
-
+    
     @FXML
     private void lblCadastroEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.NOVO_CADASTRO.getPhrase());
     }
-
+    
 }
