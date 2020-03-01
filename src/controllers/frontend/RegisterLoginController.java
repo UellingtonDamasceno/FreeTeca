@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.Login;
 import model.Student;
 import model.exceptions.MissingValuesException;
 import model.exceptions.PasswordWrongException;
@@ -56,6 +55,8 @@ public class RegisterLoginController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

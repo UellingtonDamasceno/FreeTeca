@@ -92,8 +92,8 @@ public class Settings {
         UNEF("Universidade de Ensino Superior de Feira de Santana", Phrase.UNEF),
         FAT("Faculdade Anisio Texeira", Phrase.FAT);
 
-        private String name;
-        private Phrase audio;
+        private final String name;
+        private final Phrase audio;
 
         private Instituition(String name, Phrase audio) {
             this.name = name;
