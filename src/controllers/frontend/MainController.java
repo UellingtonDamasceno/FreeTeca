@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -66,6 +67,8 @@ public class MainController implements Initializable {
     private boolean eye;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,6 +84,7 @@ public class MainController implements Initializable {
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 AudioController.getInstance().setCanReproduce(newValue);
+                imgEye.disableProperty();
             }
         });
         
@@ -177,6 +181,64 @@ public class MainController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void lblEmailEntered(MouseEvent event) {
+        System.out.println("\nDentro de Email carai");
+        AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
+    }
+
+    @FXML
+    private void lblSenhaEntered(MouseEvent event) {
+        System.out.println("\nDentro de Senha carai");
+        AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
+    }
+
+    @FXML
+    private void btnAcessibilidadeEntered(MouseEvent event) {
+        System.out.println("\nDentro de Acessibilidade");
+        if (AudioController.getInstance().getCanReproduce()){
+            AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
+            System.out.println("\nPode Falar.");
+        }
+        else{
+            AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
+            System.out.println("Não pode falar");
+        }
+    }
+
+    @FXML
+    private void btnConfigEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.CONFIGURACOES.getPhrase());
+        System.out.println("\nDentro de Config.");
+    }
+
+    @FXML
+    private void txtEmailEntered(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void txtSenhaEntered(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void lblErrorEntered(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void btnEntrarEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.ENTRAR.getPhrase());
+        System.out.println("\nDentro de Entrar");
+    }
+
+    @FXML
+    private void lblCadastroEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.NOVO_CADASTRO.getPhrase());
+        System.out.println("\nDentro de Cadastro");
     }
 
 }

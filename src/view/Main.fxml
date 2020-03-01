@@ -42,7 +42,7 @@
                                  <children>
                                     <ToggleButton fx:id="btnAccessbility" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" onMouseEntered="#btnAcessibilidadeEntered" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../resources/icons/accessibility.png" />
                                              </image>
@@ -54,7 +54,7 @@
                                     </ToggleButton>
                                     <Button fx:id="btnSettings" accessibleHelp="Configuração" accessibleText="Configuração" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" onMouseEntered="#btnConfigEntered" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../resources/icons/settings.png" />
                                              </image>
@@ -78,12 +78,12 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="426.0" spacing="10.0">
                                  <children>
-                                    <Label text="E-mail">
+                                    <Label onMouseEntered="#lblEmailEntered" text="E-mail">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="txtEmail" prefHeight="25.0" prefWidth="343.0" styleClass="text-field" />
+                                    <TextField fx:id="txtEmail" onMouseEntered="#txtEmailEntered" prefHeight="25.0" prefWidth="343.0" styleClass="text-field" />
                                  </children>
                                  <VBox.margin>
                                     <Insets />
@@ -94,14 +94,14 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="380.0" spacing="10.0">
                                  <children>
-                                    <Label text="Senha">
+                                    <Label onMouseEntered="#lblSenhaEntered" text="Senha">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
                                     <VBox minHeight="-Infinity" prefHeight="39.0" prefWidth="343.0">
                                        <children>
-                                          <PasswordField fx:id="txtPassword" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="343.0" styleClass="text-field" />
+                                          <PasswordField fx:id="txtPassword" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#txtSenhaEntered" prefHeight="37.0" prefWidth="343.0" styleClass="text-field" />
                                           <ImageView fx:id="imgEye" fitHeight="30.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" translateX="306.0" translateY="-33.0">
                                              <image>
                                                 <Image url="@../resources/icons/closed_eye.png" />
@@ -119,12 +119,12 @@
                               </HBox>
                               <Pane prefHeight="43.0" prefWidth="426.0">
                                  <children>
-                                    <Label fx:id="lblInfo" layoutX="14.0" prefHeight="36.0" prefWidth="366.0" />
+                                    <Label fx:id="lblInfo" layoutX="14.0" onMouseEntered="#lblErrorEntered" prefHeight="36.0" prefWidth="366.0" />
                                  </children>
                               </Pane>
                               <HBox alignment="CENTER" prefHeight="45.0" prefWidth="426.0" spacing="110.0">
                                  <children>
-                                    <Label fx:id="btnRegister" onMouseClicked="#openRegister" prefHeight="30.0" prefWidth="190.0" styleClass="label-link" text="Não tem uma conta? Cadastre-se aqui!" textFill="#0055ff">
+                                    <Label fx:id="btnRegister" onMouseClicked="#openRegister" onMouseEntered="#lblCadastroEntered" prefHeight="30.0" prefWidth="190.0" styleClass="label-link" text="Não tem uma conta? Cadastre-se aqui!" textFill="#0055ff">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -132,7 +132,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Button fx:id="btnEntry" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="86.0" stylesheets="@Main.css" text="Entrar">
+                                    <Button fx:id="btnEntry" mnemonicParsing="false" onAction="#login" onMouseEntered="#btnEntrarEntered" prefHeight="33.0" prefWidth="86.0" stylesheets="@Main.css" text="Entrar">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

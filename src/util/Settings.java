@@ -135,4 +135,44 @@ public class Settings {
             return this.genere;
         }
     }
+    
+    public enum Phrase{
+        AVANCAR("AVANÇAR"),
+        NOVO_CADASTRO("CADASTROAQUI"),
+        CONFIGURACOES("CONFIG"),
+        CONFIRMAR_SENHA("CONFIRMARSENHA"),
+        CPF("CPF"),
+        DESLIGAR_ACESSIBILIDADE("DESLIGARACESSIBILIDADE"),
+        EDITAR_INFORMACAO("EDITARINFO"),
+        EMAIL_DE_RECUPERACAO("EMAILDERECUPERACAO"),
+        ENDERECO("ENDERECO"),
+        ENTRAR("ENTRAR"),
+        EXCLUIR("EXCLUIR"),
+        GERIR_ESTUDANTES("GERIRESTUDANTES"),
+        LIGAR_ACESSIBILIDADE("LIGARACESSIBILIDADE"),
+        LISTAR_ESTUDANTES("LISTARESTUDANTES"),
+        LOGIN_INFO("LOGININFO"),
+        MATRICULA("MATRICULA"),
+        NASCIMENTO("NASCIMENTO"),
+        PRIMEIRO_NOME("PRIMEIRONOME"),
+        RECUPERACAO("RECUPERACAO"),
+        RETORNAR("RETORNAR"),
+        SAIR("SAIR"),
+        SEGUNDO_NOME("SEGUNDONOME"),
+        SENHA("SENHA"),
+        SEXO("SEXO"),
+        VISUALIZAR("VISUALIZAR"),
+        EMAIL("EMAIL"),
+        XD("XD");
+        
+        private final String phrase;       
+        private Phrase(String phrase){
+            this.phrase = phrase;
+        }
+        
+        public String getPhrase() {
+            return this.phrase;
+        }
+    }
+           
 }
