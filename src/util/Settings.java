@@ -87,19 +87,25 @@ public class Settings {
     }
 
     public enum Instituition {
-        UEFS("Universidade Estaudal de Feira de Santana"),
-        UNEB("Universidade do Estado da Baiha"),
-        UNEF("Universidade de Ensino Superior de Feira de Santana"),
-        FAT("Faculdade Anisio Texeira");
+        UEFS("Universidade Estaudal de Feira de Santana", Phrase.UEFS),
+        UNEB("Universidade do Estado da Baiha", Phrase.UNEB),
+        UNEF("Universidade de Ensino Superior de Feira de Santana", Phrase.UNEF),
+        FAT("Faculdade Anisio Texeira", Phrase.FAT);
 
         private String name;
+        private Phrase audio;
 
-        private Instituition(String name) {
+        private Instituition(String name, Phrase audio) {
             this.name = name;
+            this.audio = audio;
         }
 
         public String getName() {
             return this.name;
+        }
+        
+        public String getAudio(){
+            return this.audio.getPhrase();
         }
 
     }
@@ -108,7 +114,7 @@ public class Settings {
     public enum Course {
         ECOMP("Engenharia de Computação", Phrase.ECOMP),
         CIVIL("Engenharia Civil", Phrase.CIVIL),
-        ENGAL("Engenharia Alimentos", Phrase.ENGAL);
+        ENGAL("Engenharia de Alimentos", Phrase.ENGAL);
 
         private final String name;
         private final Phrase curso;
@@ -198,6 +204,7 @@ public class Settings {
         INSTITUICAOENSINO("INSTITUICAOENSINO"),
         INSERIRMATRICULA("INSERIRMATRICULA"),
         XD("XD"),
+        INFOPERSONAL("INFOPERSONAL"),
         MASCULINO("MASCULINO"),
         FEMININO("FEMININO"),
         OUTRO("OUTRO"),

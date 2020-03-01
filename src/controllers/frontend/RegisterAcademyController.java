@@ -27,6 +27,7 @@ import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
 import util.Settings;
 import util.Settings.Course;
+import util.Settings.Instituition;
 
 /**
  * FXML Controller class
@@ -61,8 +62,15 @@ public class RegisterAcademyController implements Initializable {
         comboCourse.setOnAction((event) -> {
             Course newValue = comboCourse.getSelectionModel().getSelectedItem();
             AudioController.getInstance().playAudio(newValue.getCurso());
-            System.out.println("O resultado:" + newValue.getCurso());
         });
+        
+        comboAcademy.setOnAction((event)->{
+            Instituition temp = comboAcademy.getSelectionModel().getSelectedItem();
+            AudioController.getInstance().playAudio(temp.getAudio());
+        });
+        
+        
+        
 
         MaskFieldUtil.reproducer(txtID);
     }

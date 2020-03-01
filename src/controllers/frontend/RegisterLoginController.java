@@ -1,5 +1,6 @@
 package controllers.frontend;
 
+import controllers.backend.AudioController;
 import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
@@ -16,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import model.exceptions.MissingValuesException;
 import model.exceptions.PasswordWrongException;
 import util.MaskFieldUtil;
@@ -140,5 +142,45 @@ public class RegisterLoginController implements Initializable {
         } catch (MissingValuesException ex) {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
+    }
+
+    @FXML
+    private void lblInfoLoginOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.LOGIN_INFO.getPhrase());
+    }
+
+    @FXML
+    private void btnRetornarOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.RETORNAR.getPhrase());
+    }
+
+    @FXML
+    private void btnAvancarOnmouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.AVANCAR.getPhrase());
+    }
+
+    @FXML
+    private void lblEmailOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
+    }
+
+    @FXML
+    private void lblSenhaOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
+    }
+
+    @FXML
+    private void lblConfirmarSenhaOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.CONFIRMAR_SENHA.getPhrase());
+    }
+
+    @FXML
+    private void lblInfoRecuperacaoOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.RECUPERACAO.getPhrase());
+    }
+
+    @FXML
+    private void lblEmailRECOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.EMAIL_DE_RECUPERACAO.getPhrase());
     }
 }

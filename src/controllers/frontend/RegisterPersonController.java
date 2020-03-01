@@ -1,5 +1,6 @@
 package controllers.frontend;
 
+import controllers.backend.AudioController;
 import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
@@ -17,8 +18,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
+import util.Settings;
 import util.Settings.Genere;
 import util.Settings.Scenes;
 
@@ -62,6 +65,11 @@ public class RegisterPersonController implements Initializable {
 
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(dataPiker.getEditor());
+        
+        cbGenere.setOnAction((event)->{
+            Genere temp = cbGenere.getSelectionModel().getSelectedItem();
+            AudioController.getInstance().playAudio(temp.getGenere());
+        });
     }
 
     @FXML
@@ -86,6 +94,51 @@ public class RegisterPersonController implements Initializable {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
 
+    }
+
+    @FXML
+    private void lblInfoPersonOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.INFOPERSONAL.getPhrase());
+    }
+
+    @FXML
+    private void btnRetornarOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.RETORNAR.getPhrase());
+    }
+
+    @FXML
+    private void btnAvancarOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.AVANCAR.getPhrase());
+    }
+
+    @FXML
+    private void lblPrimeiroNomeOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.PRIMEIRO_NOME.getPhrase());
+    }
+
+    @FXML
+    private void lblUltimoNomeOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.SEGUNDO_NOME.getPhrase());
+    }
+
+    @FXML
+    private void lblNascimentoOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.NASCIMENTO.getPhrase());
+    }
+
+    @FXML
+    private void lblGeneroOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.SEXO.getPhrase());
+    }
+
+    @FXML
+    private void lblEnderecoOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.ENDERECO.getPhrase());
+    }
+
+    @FXML
+    private void lblCPFOnMouseEntered(MouseEvent event) {
+        AudioController.getInstance().playAudio(Settings.Phrase.CPF.getPhrase());
     }
 
 }

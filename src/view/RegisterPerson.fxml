@@ -19,7 +19,7 @@
                <children>
                   <VBox prefHeight="63.0" prefWidth="212.0" spacing="5.0">
                      <children>
-                        <Label text="Primeiro nome">
+                        <Label onMouseEntered="#lblPrimeiroNomeOnMouseEntered" text="Primeiro nome">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -29,7 +29,7 @@
                   </VBox>
                   <VBox prefHeight="63.0" prefWidth="210.0" spacing="5.0">
                      <children>
-                        <Label text="Último nome">
+                        <Label onMouseEntered="#lblUltimoNomeOnMouseEntered" text="Último nome">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -44,7 +44,7 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label prefHeight="22.0" prefWidth="94.0" text="Nascimento">
+                  <Label onMouseEntered="#lblNascimentoOnMouseEntered" prefHeight="22.0" prefWidth="94.0" text="Nascimento">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -57,7 +57,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label text="Gênero">
+                  <Label onMouseEntered="#lblGeneroOnMouseEntered" text="Sexo">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -70,7 +70,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label text="CPF">
+                  <Label onMouseEntered="#lblCPFOnMouseEntered" text="CPF">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -83,7 +83,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label text="Endereço">
+                  <Label onMouseEntered="#lblEnderecoOnMouseEntered" text="Endereço">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -101,13 +101,13 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="128.0" prefWidth="420.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#previous" text="Retornar" />
-            <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" text="Avançar" />
+            <Button mnemonicParsing="false" onAction="#previous" onMouseEntered="#btnRetornarOnMouseEntered" text="Retornar" />
+            <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" onMouseEntered="#btnAvancarOnMouseEntered" text="Avançar" />
          </children>
       </HBox>
    </bottom>
    <top>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" onMouseEntered="#lblInfoPersonOnMouseEntered" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label styleClass="label-header" text="Informações" />
             <Label styleClass="label-header" text="Pessoais" />
