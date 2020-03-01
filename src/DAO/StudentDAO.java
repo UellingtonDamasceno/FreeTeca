@@ -27,6 +27,8 @@ public class StudentDAO {
     public boolean create(Student a) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        
+        
         try {
             stmt = con.prepareStatement("INSERT INTO alunos (firstName, lastName, cpf, andress, sexo, institution, course, registration, email, recoveryEmail, password)"
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -43,9 +45,13 @@ public class StudentDAO {
             stmt.setString(10, a.getLogin().getRecoveryEmail());
             stmt.setString(11, a.getLogin().getPassword());
             
-            System.out.println(stmt.toString());
-            stmt.executeUpdate();
-
+            if(!String a.getCpf().matches("[0-9]*")){
+          	    System.out.println("Cpf inválido!");
+            }else {    
+               System.out.println(stmt.toString());
+               stmt.executeUpdate();
+            }
+               
             return true;
         } catch (SQLException ex) {
             System.out.println("Entrou aki no SQLException: " + ex.getMessage());

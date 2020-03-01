@@ -25,8 +25,13 @@ public class AdministratorDAO {
             stmt.setString(7, a.getLogin().getRecoveryEmail());
             stmt.setString(8, a.getLogin().getPassword());
             
-            System.out.println(stmt.toString());
-            stmt.executeUpdate();
+            //Método de verificação do CPF, só pode ter números
+            if(!String a.getCpf().matches("[0-9]*")){
+          	    System.out.println("Cpf inválido!");
+            }else {    
+               System.out.println(stmt.toString());
+               stmt.executeUpdate();
+            }
 
             return true;
         } catch (SQLException ex) {
