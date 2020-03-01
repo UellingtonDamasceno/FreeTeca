@@ -19,7 +19,7 @@
          <children>
             <VBox prefHeight="81.0" prefWidth="406.0">
                <children>
-                  <Label text="E-mail">
+                  <Label onMouseEntered="#lblEmailOnMouseEntered" text="E-mail">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -29,7 +29,7 @@
             </VBox>
             <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="406.0">
                <children>
-                  <Label text="Senha">
+                  <Label onMouseEntered="#lblSenhaOnMouseEntered" text="Senha">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -47,7 +47,7 @@
             </VBox>
             <VBox minHeight="-Infinity" prefHeight="60.0" prefWidth="426.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="179.0" text="Confirmar Senha">
+                  <Label onMouseEntered="#lblConfirmarSenhaOnMouseEntered" prefHeight="21.0" prefWidth="179.0" text="Confirmar Senha">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -63,7 +63,7 @@
                   </ImageView>
                </children>
             </VBox>
-            <VBox prefHeight="52.0" prefWidth="396.0">
+            <VBox onMouseEntered="#lblInfoRecuperacaoOnMouseEntered" prefHeight="52.0" prefWidth="396.0">
                <children>
                   <Label text="Por questões de segurança," />
                   <Label text="Informe um e-mail de recuperação!" />
@@ -71,7 +71,7 @@
             </VBox>
             <VBox minHeight="-Infinity" prefHeight="60.0" prefWidth="406.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="215.0" text="E-mail Recuperação">
+                  <Label onMouseEntered="#lblEmailRECOnMouseEntered" prefHeight="21.0" prefWidth="215.0" text="E-mail Recuperação">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -92,14 +92,19 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="128.0" prefWidth="426.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
+            <Button mnemonicParsing="false" onAction="#previous" onMouseEntered="#btnRetornarOnMouseEntered" text="Retornar" />
+            <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" onMouseEntered="#btnAvancarOnmouseEntered" text="Avançar" />
+=======
             <Button mnemonicParsing="false" onAction="#previous" text="Retornar" />
             <Button fx:id="btnEdit" mnemonicParsing="false" text="Editar" visible="false" />
             <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" text="Avançar" />
+>>>>>>> daa35c23d47259953ab11741c1204a64d168bc14
          </children>
       </HBox>
    </bottom>
    <top>
-      <VBox alignment="CENTER" prefHeight="145.0" prefWidth="426.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" onMouseEntered="#lblInfoLoginOnMouseEntered" prefHeight="145.0" prefWidth="426.0" BorderPane.alignment="CENTER">
          <children>
             <Label styleClass="label-header" text="Informações" />
             <Label styleClass="label-header" text="Login" />
