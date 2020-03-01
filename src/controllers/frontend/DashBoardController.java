@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import model.Person;
+import util.Settings.Admin;
 import util.Settings.Genere;
 import util.Settings.Icons;
 import util.Settings.Scenes;
@@ -65,16 +65,19 @@ public class DashBoardController implements Initializable {
     }
 
     public void intialize(Person person) {
-        System.out.println(person);
-        Platform.runLater(() -> {
-            Image image;
-            image = (person.getGenere() == Genere.MASCULINO)
-                    ? new Image(Icons.USER_MALE.getIconPath())
-                    : new Image(Icons.USER_FEMALE.getIconPath());
-
-            this.imageViewUser.setImage(image);
-            this.lblName.setText("Bem-vindo, " + person.getFirstName());
-        });
+        String name;
+        String imagePath;
+        if (person == null) {
+            name = Admin.NAME.getValue();
+            imagePath = Admin.IMAGE.getValue();
+        } else {
+            name = person.getFirstName();
+            imagePath = (person.getGenere() == Genere.MASCULINO)
+                    ? Icons.USER_MALE.getIconPath()
+                    : Icons.USER_FEMALE.getIconPath();
+        }
+        this.lblName.setText("Bem-vindo, " + name);
+        this.imageViewUser.setImage(new Image(imagePath));
     }
 
     public void changeCenter(Scenes scene) {

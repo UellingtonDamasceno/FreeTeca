@@ -47,6 +47,7 @@ public class Settings {
     }
 
     public enum Icons {
+        ADM("admin"),
         BOOKS("books"),
         CLOSED_EYE("closed_eye"),
         SLEEPY_EYE("sleepy_eye"),
@@ -151,7 +152,6 @@ public class Settings {
         private final Phrase sexo;
 
         private Genere(String genere, Phrase sexo) {
-
             this.genere = genere;
             this.sexo = sexo;
         }
@@ -218,5 +218,22 @@ public class Settings {
             return this.phrase;
         }
     }
-
+    
+    public enum Admin{
+        NAME("Admin"),
+        EMAIL("root"),
+        PASSWORD("root"),
+        IMAGE(Icons.ADM.getIconPath());
+        
+        private final String value;
+        
+        private Admin(String value){
+            this.value = value;
+        }
+        
+        public String getValue(){
+            return this.value;
+        }
+    }
+    
 }

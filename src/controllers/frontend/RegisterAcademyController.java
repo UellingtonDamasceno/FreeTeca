@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.frontend;
 
 import controllers.backend.AudioController;
@@ -33,8 +28,6 @@ import util.Settings.Course;
  *
  * @author acmne
  */
-
-
 public class RegisterAcademyController implements Initializable {
 
     @FXML
@@ -61,12 +54,11 @@ public class RegisterAcademyController implements Initializable {
         comboCourse.setOnAction((event) -> {
             Course newValue = comboCourse.getSelectionModel().getSelectedItem();
             AudioController.getInstance().playAudio(newValue.getCurso());
-            System.out.println("O resultado:" + newValue.getCurso());
         });
 
         MaskFieldUtil.reproducer(txtID);
     }
-        
+
     @FXML
     private void infoAcademy(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.ACADEMYINFO.getPhrase());
@@ -115,20 +107,17 @@ public class RegisterAcademyController implements Initializable {
     private void save(ActionEvent event) {
         try {
             ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
+            try {
+                Student student = ValidationController.getInstance().save();
+                NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
+                FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                NotificationsController.getInstance().errorNotification("Conexão falida!", "Conecte-se com a internet e tente novamente!");
+            }
         } catch (MissingValuesException ex) {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
-
-        try {
-            Student student = ValidationController.getInstance().save();
-            NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
-            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            NotificationsController.getInstance().errorNotification("Conexão falida!", "Conecte-se com a internet e tente novamente!");
-        }
-
     }
-
 }

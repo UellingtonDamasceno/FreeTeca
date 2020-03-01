@@ -4,6 +4,7 @@ import controllers.backend.AudioController;
 import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
+import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -27,10 +28,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.LogablePerson;
+import model.Person;
 import model.exceptions.MissingValuesException;
 import model.exceptions.NotFoundException;
 import util.MaskFieldUtil;
 import util.Settings;
+import util.Settings.Admin;
 import util.Settings.Scenes;
 import util.Settings.Slider;
 
@@ -40,7 +43,7 @@ import util.Settings.Slider;
  * @author acmne
  */
 public class MainController implements Initializable {
-    
+
     @FXML
     private ImageView imageViewSlider;
     @FXML
@@ -57,18 +60,18 @@ public class MainController implements Initializable {
     private Label btnRegister;
     @FXML
     private Button btnEntry;
-    
+
     @FXML
     private VBox homePanel;
     @FXML
     private HBox hBoxGit;
     @FXML
     private Pane paneRoot;
-    
+
     private boolean activated;
     @FXML
     private ImageView imgEye;
-    
+
     private boolean eye;
     @FXML
     private ImageView ImageAcessibilidade;
@@ -88,7 +91,7 @@ public class MainController implements Initializable {
         this.setAllBinds();
 //        this.startSlide();
     }
-    
+
     private void setAllBinds() {
         ImageAcessibilidade.setOnMouseEntered((event) -> {
             if (!this.btnAccessbility.isSelected()) {
@@ -96,7 +99,7 @@ public class MainController implements Initializable {
             } else {
                 AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
             }
-            
+
         });
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -112,7 +115,7 @@ public class MainController implements Initializable {
                 AudioController.getInstance().setCanReproduce(false);
             }
         });
-        
+
         imgEye.setOnMouseEntered((event) -> {
             if (eye) {
                 this.imgEye.setImage(new Image(Settings.Icons.SLEEPY_EYE.getIconPath()));
@@ -123,7 +126,7 @@ public class MainController implements Initializable {
                 this.imgEye.setImage(new Image(Settings.Icons.CLOSED_EYE.getIconPath()));
             }
         });
-        
+
         imgEye.setOnMouseClicked((event) -> {
             if (eye) {
                 this.imgEye.setImage(new Image(Settings.Icons.EYE.getIconPath()));
@@ -141,7 +144,7 @@ public class MainController implements Initializable {
             this.eye = !this.eye;
         });
     }
-    
+
     private void startSlide() {
         this.activated = true;
         new Thread(() -> {
@@ -165,17 +168,17 @@ public class MainController implements Initializable {
             }
         }).start();
     }
-    
+
     @FXML
     private void openSettings(ActionEvent event) {
         this.activated = !this.activated;
     }
-    
+
     @FXML
     private void openRegister(MouseEvent event) {
         this.changeSideBar(Scenes.REGISTER_PERSON);
     }
-    
+
     public void changeSideBar(Scenes scene) {
         try {
             Parent loadedScreen = FacadeFrontend.getInstance().getScreen(scene);
@@ -186,85 +189,98 @@ public class MainController implements Initializable {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void hide(MouseEvent event) {
         Platform.runLater(() -> {
             this.hBoxGit.setVisible(false);
         });
     }
-    
+
     @FXML
     private void show(MouseEvent event) {
         Platform.runLater(() -> {
             this.hBoxGit.setVisible(true);
         });
     }
-    
+
     @FXML
     private void login(ActionEvent event) {
         try {
-            LogablePerson person = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
-            if (person.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
-                FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.DASHBOARD);
-                Parent loadedScreen = loader.load();
-                Object controller = loader.getController();
-                FacadeFrontend.getInstance().setDashBoardController(controller);
-                FacadeFrontend.getInstance().setUser(person);
-                FacadeFrontend.getInstance().addScreen(Scenes.DASHBOARD, loadedScreen);
-                FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+            if (this.txtEmail.getText().equals(Admin.EMAIL.getValue())) {
+                if (this.txtPassword.getText().equals(Admin.PASSWORD.getValue())) {
+                    this.nextScene(null);
+                } else {
+                    NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                }
             } else {
-                NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                LogablePerson person = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
+                if (person.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
+                    this.nextScene(person);
+                } else {
+                    NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                }
             }
         } catch (MissingValuesException ex) {
             NotificationsController.getInstance().errorNotification("Campo vazio.", ex.getMessage());
         } catch (NotFoundException ex) {
-            NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n"+ this.txtEmail.getText());
+            NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n" + this.txtEmail.getText());
         } catch (Exception ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
-    
+
+    private void nextScene(Person person) throws IOException, Exception {
+        FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.DASHBOARD);
+        Parent loadedScreen = loader.load();
+        Object controller = loader.getController();
+        FacadeFrontend.getInstance().setDashBoardController(controller);
+        FacadeFrontend.getInstance().setUser(person);
+        FacadeFrontend.getInstance().addScreen(Scenes.DASHBOARD, loadedScreen);
+        FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+    }
+
     @FXML
     private void lblEmailEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
     }
-    
+
     @FXML
     private void lblSenhaEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
     }
-    
+
     @FXML
     private void btnConfigEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.CONFIGURACOES.getPhrase());
     }
-    
+
     @FXML
     private void txtEmailEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.INSERIREMAIL.getPhrase());
     }
-    
+
     @FXML
     private void txtSenhaEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.INSERIRSENHA.getPhrase());
     }
-    
+
     @FXML
     private void lblErrorEntered(MouseEvent event) {
         if (lblInfo.isDisabled()) {
             AudioController.getInstance().playAudio(Settings.Phrase.ERROLOGIN.getPhrase());
         }
     }
-    
+
     @FXML
     private void btnEntrarEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.ENTRAR.getPhrase());
     }
-    
+
     @FXML
     private void lblCadastroEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.NOVO_CADASTRO.getPhrase());
     }
-    
+
 }
