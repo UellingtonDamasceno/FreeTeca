@@ -6,15 +6,22 @@
 package controllers.frontend;
 
 import controllers.backend.AudioController;
+import controllers.backend.ValidationController;
+import facade.FacadeFrontend;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
 import util.Settings;
 import util.Settings.Course;
@@ -24,6 +31,8 @@ import util.Settings.Course;
  *
  * @author acmne
  */
+
+
 public class RegisterAcademyController implements Initializable {
 
     @FXML
@@ -48,14 +57,14 @@ public class RegisterAcademyController implements Initializable {
         this.comboAcademy.getSelectionModel().selectFirst();
 
         comboCourse.setOnAction((event) -> {
-          Course newValue = comboCourse.getSelectionModel().getSelectedItem();
-          AudioController.getInstance().playAudio(newValue.getCurso());  
-          System.out.println("O resultado:" + newValue.getCurso());
+            Course newValue = comboCourse.getSelectionModel().getSelectedItem();
+            AudioController.getInstance().playAudio(newValue.getCurso());
+            System.out.println("O resultado:" + newValue.getCurso());
         });
-        
+
         MaskFieldUtil.reproducer(txtID);
     }
-
+        
     @FXML
     private void infoAcademy(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.ACADEMYINFO.getPhrase());
@@ -63,17 +72,17 @@ public class RegisterAcademyController implements Initializable {
 
     @FXML
     private void lblAcademyMouseEntered(MouseEvent event) {
-         AudioController.getInstance().playAudio(Settings.Phrase.INSTITUICAOENSINO.getPhrase());
+        AudioController.getInstance().playAudio(Settings.Phrase.INSTITUICAOENSINO.getPhrase());
     }
 
     @FXML
     private void lblCursoMouseEntered(MouseEvent event) {
-         AudioController.getInstance().playAudio(Settings.Phrase.CURSO.getPhrase());
+        AudioController.getInstance().playAudio(Settings.Phrase.CURSO.getPhrase());
     }
 
     @FXML
     private void lblMatriculaMouseEntered(MouseEvent event) {
-         AudioController.getInstance().playAudio(Settings.Phrase.MATRICULAA.getPhrase());
+        AudioController.getInstance().playAudio(Settings.Phrase.MATRICULAA.getPhrase());
     }
 
     @FXML
@@ -83,12 +92,44 @@ public class RegisterAcademyController implements Initializable {
 
     @FXML
     private void btnRetornarMouseEntered(MouseEvent event) {
-         AudioController.getInstance().playAudio(Settings.Phrase.RETORNAR.getPhrase());
+        AudioController.getInstance().playAudio(Settings.Phrase.RETORNAR.getPhrase());
     }
 
     @FXML
     private void btnSalvarMouseEntered(MouseEvent event) {
-         AudioController.getInstance().playAudio(Settings.Phrase.SALVAR.getPhrase());
+        AudioController.getInstance().playAudio(Settings.Phrase.SALVAR.getPhrase());
     }
-    
+
+    @FXML
+    private void returning(ActionEvent event) {
+        try {
+            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.REGISTER_LOGIN);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void save(ActionEvent event) {
+        try {
+            ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
+        } catch (MissingValuesException ex) {
+            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            ValidationController.getInstance().save();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

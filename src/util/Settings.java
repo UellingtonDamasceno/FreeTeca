@@ -18,10 +18,10 @@ public class Settings {
         REGISTER_PERSON("RegisterPerson.fxml", "Registro", true),
         REGISTER_LOGIN("RegisterLogin.fxml", "Login", true),
         REGISTER_ACADEMY("RegisterAcademy.fxml", "Academy", true),
-        DASHBOARD("DashBoard.fxml","Dash", false),
+        DASHBOARD("DashBoard.fxml", "Dash", false),
         ITEM_LIST("ItemList.fxml", "Item", true),
         LIST("List.fxml", "List", true);
-        
+
         private final String name;
         private final String title;
         private final boolean cache;
@@ -51,7 +51,7 @@ public class Settings {
         CLOSED_EYE("closed_eye"),
         SLEEPY_EYE("sleepy_eye"),
         EYE("eye");
-        
+
         private final String name;
         private final String ORIGIN = "/resources/icons/";
         private final String EXTENSION = ".png";
@@ -99,15 +99,14 @@ public class Settings {
         private String getName() {
             return this.name;
         }
-             
+
     }
 
     //Complementar com cursos
     public enum Course {
         ECOMP("Engenharia de Computação", Phrase.ECOMP),
-        ECIVIL("Engenharia Civil", Phrase.ECIVIL),
+        CIVIL("Engenharia Civil", Phrase.CIVIL),
         ENGAL("Engenharia Alimentos", Phrase.ENGAL);
-
 
         private final String name;
         private final Phrase curso;
@@ -116,25 +115,41 @@ public class Settings {
             this.name = name;
             this.curso = curso;
         }
-        
-        public String getName(){
+
+        public static Course getCourse(String name) {
+            switch (name) {
+                case "Engenharia de Computação":
+                    return ECOMP;
+                case "Engenharia Civil":
+                    return CIVIL;
+                case "Engenharia de Alimentos":
+                    return ENGAL;
+                default:
+                    throw new AssertionError();
+            }
+        }
+
+        public String getName() {
             return this.name;
         }
-        
-        public String getCurso(){
+
+        public String getCurso() {
             return this.curso.getPhrase();
         }
 
     }
 
     public enum Genere {
-        MASCULINO("M", Phrase.MASCULINO),
-        FEMININO("F", Phrase.FEMININO),
-        OUTRO("O", Phrase.OUTRO);
+
+        MASCULINO("MASCULINO", Phrase.MASCULINO),
+        FEMININO("FEMININO", Phrase.FEMININO),
+        OUTRO("OUTRO", Phrase.OUTRO);
 
         private final String genere;
         private final Phrase sexo;
+
         private Genere(String genere, Phrase sexo) {
+
             this.genere = genere;
             this.sexo = sexo;
         }
@@ -143,8 +158,8 @@ public class Settings {
             return this.genere;
         }
     }
-    
-    public enum Phrase{
+
+    public enum Phrase {
         AVANCAR("AVANÇAR"),
         NOVO_CADASTRO("CADASTROAQUI"),
         CONFIGURACOES("CONFIG"),
@@ -181,24 +196,25 @@ public class Settings {
         INSTITUICAOENSINO("INSTITUICAOENSINO"),
         INSERIRMATRICULA("INSERIRMATRICULA"),
         XD("XD"),
-        
         //Áudios para gravar.
-        
+
         MASCULINO("MASCULINO"),
         FEMININO("FEMININO"),
-        OUTRO("OUTRO"), 
+        OUTRO("OUTRO"),
         ENGAL("SALVAR"),
-        ECIVIL("CURSO"),
+        CIVIL("CURSO"),
         ECOMP("XD");
-        
-        private final String phrase;       
-        private Phrase(String phrase){
+
+        private final String phrase;
+
+        private Phrase(String phrase) {
+
             this.phrase = phrase;
         }
-        
+
         public String getPhrase() {
             return this.phrase;
         }
     }
-           
+
 }

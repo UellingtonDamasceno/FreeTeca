@@ -60,8 +60,9 @@
    <bottom>
       <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="128.0" prefWidth="200.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnReturn" mnemonicParsing="false" onMouseEntered="#btnRetornarMouseEntered" text="Retornar" />
-            <Button fx:id="btnSave" mnemonicParsing="false" onMouseEntered="#btnSalvarMouseEntered" text="Salvar" />
+
+            <Button fx:id="btnReturn" mnemonicParsing="false" onMouseEntered="#btnRetornarMouseEntered" onAction="#returning" text="Retornar" />
+            <Button fx:id="btnSave" mnemonicParsing="false" onMouseEntered="#btnSalvarMouseEntered" onAction="#save" text="Salvar" />
          </children>
       </HBox>
    </bottom>
