@@ -1,7 +1,6 @@
 /*
     https://respostas.guj.com.br/49038-mascaras-de-cpfcnpj-cep-fone-e-outros-em-javafx
-*/
-
+ */
 package util;
 
 import controllers.backend.AudioController;
@@ -26,12 +25,14 @@ public abstract class MaskFieldUtil {
 
     private static final List<KeyCode> ignoreKeyCodes = new ArrayList<>();
 
-    public static void reproducer(TextField textField){
+    public static void reproducer(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            AudioController.getInstance().playAudio(newValue.toCharArray()[newValue.length() - 1]);
+            if (newValue.toCharArray().length > 0) {
+                AudioController.getInstance().playAudio(newValue.toCharArray()[newValue.length() - 1]);
+            }
         });
     }
-    
+
     public static void ignoreKeys(TextField textField) {
         textField.addEventFilter(KeyEvent.KEY_PRESSED, (EventHandler) new EventHandler<KeyEvent>() {
 

@@ -1,8 +1,10 @@
 package controllers.frontend;
 
+import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,20 +51,22 @@ public class RegisterPersonController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.dataPiker.setValue(LocalDate.now());
         this.cbGenere.setItems(FXCollections.observableArrayList(Genere.values()));
+        this.cbGenere.getSelectionModel().selectFirst();
         MaskFieldUtil.reproducer(txtCpf);
         MaskFieldUtil.reproducer(dataPiker.getEditor());
         MaskFieldUtil.reproducer(txtFirstName);
         MaskFieldUtil.reproducer(txtLastName);
         MaskFieldUtil.reproducer(txtAddress);
-        
+
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(dataPiker.getEditor());
     }
 
     @FXML
-    private void previous(ActionEvent event){      
-        try {            
+    private void previous(ActionEvent event) {
+        try {
             FacadeFrontend.getInstance().changeSideBar(Scenes.HOME_SIDE);
         } catch (Exception ex) {
             Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,15 +76,17 @@ public class RegisterPersonController implements Initializable {
     @FXML
     private void next(ActionEvent event) {
         try {
+            System.out.println(txtFirstName.getText());
             ValidationController.getInstance().registerPerson(txtFirstName.getText(), txtLastName.getText(), dataPiker.getValue().getDayOfWeek().name(), cbGenere.getValue().getGenere(), txtCpf.getText(), txtAddress.getText());
+            try {
+                FacadeFrontend.getInstance().changeSideBar(Scenes.REGISTER_LOGIN);
+            } catch (Exception ex) {
+                Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (MissingValuesException ex) {
-            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
-        try {
-            FacadeFrontend.getInstance().changeSideBar(Scenes.REGISTER_LOGIN);
-        } catch (Exception ex) {
-            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
 }

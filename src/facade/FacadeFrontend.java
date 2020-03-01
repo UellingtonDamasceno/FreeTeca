@@ -1,5 +1,6 @@
 package facade;
 
+import controllers.frontend.ListController;
 import controllers.frontend.MainController;
 import controllers.frontend.ScreensController;
 import controllers.frontend.StageController;
@@ -19,6 +20,7 @@ public class FacadeFrontend {
     private ScreensController screensController;
     private StageController stageController;
     private MainController mainController;
+    private ListController listController;
 
     private FacadeFrontend() {
         this.screensController = new ScreensController();
@@ -39,6 +41,10 @@ public class FacadeFrontend {
     public void changeScreean(Scenes scene) throws Exception {
         Parent loadedScreen = this.screensController.loadScreen(scene);
         this.stageController.changeMainStage(scene.getTitle(), loadedScreen);
+    }
+
+    public void setListController(Object controller) {
+        this.listController = (ListController) controller;
     }
 
     public Parent getScreen(Scenes scene) throws Exception {
@@ -65,8 +71,12 @@ public class FacadeFrontend {
     public void changeSideBar(Scenes scene) {
         this.mainController.changeSideBar(scene);
     }
-    
-    public FXMLLoader getLoaderScreen(Scenes scene){
+
+    public FXMLLoader getLoaderScreen(Scenes scene) {
         return this.screensController.getLoaderFXML(scene);
+    }
+
+    public void removeItemList(Parent root) {
+        this.listController.removeItem(root);
     }
 }

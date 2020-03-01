@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.frontend;
 
 import DAO.StudentDAO;
@@ -20,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 import model.Student;
 import util.Settings.Scenes;
@@ -58,9 +52,9 @@ public class ListController implements Initializable {
                     ItemListController itemController = loader.getController();//To ouvindo a musica 
                     itemController.loadStudent(student);
                     itemLists.add(loadedScreen);
-//                    Platform.runLater(() -> {
-                        vboxList.getChildren().add(loadedScreen);
-//                    }
+                    Platform.runLater(() -> {
+                    vboxList.getChildren().add(loadedScreen);
+                    });
                 } catch (IOException ex) {
                     Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -70,6 +64,12 @@ public class ListController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void removeItem(Parent root) {
+        Platform.runLater(() -> {
+            this.vboxList.getChildren().remove(root);
+        });
     }
 
 }

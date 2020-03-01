@@ -65,5 +65,9 @@ public abstract class Person {
     public void setBirth(String birth) {
         this.birth = birth;
     }
-
+    
+    @Override
+    public String toString(){
+        return this.getFirstName() + " " + this.getLastName();
+    }
 }

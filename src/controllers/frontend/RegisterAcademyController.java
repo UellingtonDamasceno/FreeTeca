@@ -6,6 +6,7 @@
 package controllers.frontend;
 
 import controllers.backend.AudioController;
+import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
@@ -114,22 +115,18 @@ public class RegisterAcademyController implements Initializable {
         try {
             ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
         } catch (MissingValuesException ex) {
-            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
 
         try {
             ValidationController.getInstance().save();
+            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Conexão falida!", "Conecte-se com a internet e tente novamente!");
         }
 
-        try {
-            FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
-        } catch (Exception ex) {
-            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

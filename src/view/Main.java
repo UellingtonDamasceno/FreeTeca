@@ -1,10 +1,16 @@
 package view;
 
+import DAO.StudentDAO;
+import connections.ConnectionFactory;
 import facade.FacadeFrontend;
+import java.sql.Connection;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Login;
+import model.Student;
 import util.Settings;
 
 /**

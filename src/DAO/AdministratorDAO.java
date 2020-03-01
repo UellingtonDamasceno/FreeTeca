@@ -81,14 +81,19 @@ public class AdministratorDAO {
         }
     }
 
-    // chave primaria/ pesquisa é o cpf
-    public boolean delete(Administrator a) throws ClassNotFoundException, SQLException {
+    public boolean delete(Administrator a) throws ClassNotFoundException, SQLException{
+        return delete(a.getCpf());
+    }
+    
+// chave primaria/ pesquisa é o cpf
+    public boolean delete(String cpf) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement("DELETE FROM administratores WHERE cpf = ?");
+            
+            stmt.setString(1, cpf);
             System.out.println(stmt.toString());
-            stmt.setString(1, a.getCpf());
             stmt.executeUpdate();
             System.out.println("Deletado com sucesso");
             return true;
