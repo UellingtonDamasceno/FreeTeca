@@ -5,6 +5,7 @@
  */
 package controllers.frontend;
 
+import controllers.backend.NotificationsController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
@@ -134,15 +135,14 @@ public class RegisterLoginController implements Initializable {
 
     @FXML
     private void next(ActionEvent event) {
-        
         try {
             try {
                 ValidationController.getInstance().registerLogin(txtEmail.getText(), txtPassword.getText(), txtPassword1.getText(), txtRecoveryEmail.getText());
             } catch (PasswordWrongException ex) {
-                Logger.getLogger(RegisterLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                NotificationsController.getInstance().infoNotification("Senhas diferentes", ex.getMessage());
             }
         } catch (MissingValuesException ex) {
-            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
         
         try {            

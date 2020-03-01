@@ -69,7 +69,7 @@ public class ItemListController implements Initializable {
         try {
             StudentDAO studentDAO = new StudentDAO();
             studentDAO.delete(student);
-            NotificationsController.getInstance().sucessNotification("Sucesso!", "Aluno: "+ student.getFirstName() + "Foi deletado com sucesso!");
+            NotificationsController.getInstance().sucessNotification("Sucesso!", "Aluno: "+ student + " Foi deletado com sucesso!");
             FacadeFrontend.getInstance().removeItemList(this.root);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ItemListController.class.getName()).log(Level.SEVERE, null, ex);
