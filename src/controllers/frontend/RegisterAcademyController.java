@@ -118,10 +118,6 @@ public class RegisterAcademyController implements Initializable {
     private void save(ActionEvent event) {
         try {
             ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
-<<<<<<< HEAD
-=======
-
->>>>>>> daa35c23d47259953ab11741c1204a64d168bc14
             try {
                 Student student = ValidationController.getInstance().save();
                 NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
@@ -134,9 +130,6 @@ public class RegisterAcademyController implements Initializable {
         } catch (MissingValuesException ex) {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
-<<<<<<< HEAD
-=======
-
     }
 
     public void load(Student a) {
@@ -145,6 +138,5 @@ public class RegisterAcademyController implements Initializable {
         txtID.setText(a.getRegistration());
 
         btnEdit.setVisible(true);
->>>>>>> daa35c23d47259953ab11741c1204a64d168bc14
     }
 }

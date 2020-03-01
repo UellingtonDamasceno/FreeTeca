@@ -228,7 +228,6 @@ public class Settings {
         }
     }
     
-<<<<<<< HEAD
     public enum Admin{
         NAME("Admin"),
         EMAIL("root"),
@@ -246,12 +245,4 @@ public class Settings {
         }
     }
     
-=======
-    public enum Administrator{
-        
-        
-        
-    }
-
->>>>>>> daa35c23d47259953ab11741c1204a64d168bc14
 }
