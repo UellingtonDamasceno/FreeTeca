@@ -176,6 +176,9 @@ public class Settings {
         SEXO("SEXO"),
         VISUALIZAR("VISUALIZAR"),
         EMAIL("EMAIL"),
+        ERROLOGIN("ERROLOGIN"),
+        INSERIRSENHA("INSERIRSENHA"),
+        INSERIREMAIL("INSERIREMAIL"),
         XD("XD");
 
         private final String phrase;

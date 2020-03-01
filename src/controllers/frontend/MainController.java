@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -65,6 +64,8 @@ public class MainController implements Initializable {
     private ImageView imgEye;
     
     private boolean eye;
+    @FXML
+    private ImageView ImageAcessibilidade;
     /**
      * Initializes the controller class.
      * @param url
@@ -80,10 +81,28 @@ public class MainController implements Initializable {
 //        this.startSlide();
     }
 
+    
+    
     private void setAllBinds() {
+        ImageAcessibilidade.setOnMouseEntered((event) ->{
+            if(!this.btnAccessbility.isSelected())
+                AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
+            else
+                AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
+            
+        });
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 AudioController.getInstance().setCanReproduce(newValue);
+            }
+        });
+        this.btnAccessbility.setOnMouseEntered((event) -> {
+            AudioController.getInstance().setCanReproduce(true);
+            if (btnAccessbility.isSelected())
+                AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
+            else{
+                AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
+                AudioController.getInstance().setCanReproduce(false);
             }
         });
         
@@ -194,13 +213,6 @@ public class MainController implements Initializable {
         AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
     }
 
-    @FXML
-    private void btnAcessibilidadeEntered(MouseEvent event) {
-        if (AudioController.getInstance().getCanReproduce())
-            AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
-        else
-            AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
-    }
 
     @FXML
     private void btnConfigEntered(MouseEvent event) {
@@ -209,17 +221,18 @@ public class MainController implements Initializable {
 
     @FXML
     private void txtEmailEntered(MouseEvent event) {
-        
+        AudioController.getInstance().playAudio(Settings.Phrase.INSERIREMAIL.getPhrase());
     }
 
     @FXML
     private void txtSenhaEntered(MouseEvent event) {
-        
+        AudioController.getInstance().playAudio(Settings.Phrase.INSERIRSENHA.getPhrase());
     }
 
     @FXML
     private void lblErrorEntered(MouseEvent event) {
-        
+        if(lblInfo.isDisabled())
+            AudioController.getInstance().playAudio(Settings.Phrase.ERROLOGIN.getPhrase());
     }
 
     @FXML

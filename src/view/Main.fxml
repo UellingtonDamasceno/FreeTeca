@@ -42,7 +42,7 @@
                                  <children>
                                     <ToggleButton fx:id="btnAccessbility" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" onMouseEntered="#btnAcessibilidadeEntered" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="ImageAcessibilidade" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../resources/icons/accessibility.png" />
                                              </image>
@@ -52,9 +52,9 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </ToggleButton>
-                                    <Button fx:id="btnSettings" accessibleHelp="Configuração" accessibleText="Configuração" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSettings" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
+                                    <Button fx:id="btnSettings" accessibleHelp="Configuração" accessibleText="Configuração" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSettings" onMouseEntered="#btnConfigEntered" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" onMouseEntered="#btnConfigEntered" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../resources/icons/settings.png" />
                                              </image>
@@ -119,7 +119,7 @@
                               </HBox>
                               <Pane prefHeight="43.0" prefWidth="426.0">
                                  <children>
-                                    <Label fx:id="lblInfo" layoutX="14.0" onMouseEntered="#lblErrorEntered" prefHeight="36.0" prefWidth="366.0" />
+                                    <Label fx:id="lblInfo" layoutX="35.0" onMouseEntered="#lblErrorEntered" prefHeight="36.0" prefWidth="366.0" />
                                  </children>
                               </Pane>
                               <HBox alignment="CENTER" prefHeight="45.0" prefWidth="426.0" spacing="110.0">
