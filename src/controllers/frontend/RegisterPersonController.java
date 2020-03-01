@@ -6,6 +6,7 @@ import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.util.converter.LocalDateStringConverter;
+import model.Student;
 import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
 import util.Settings;
@@ -48,6 +51,8 @@ public class RegisterPersonController implements Initializable {
     private TextField txtCpf;
     @FXML
     private TextField txtAddress;
+    @FXML
+    private Button btnEdit;
 
     /**
      * Initializes the controller class.
@@ -84,7 +89,7 @@ public class RegisterPersonController implements Initializable {
     @FXML
     private void next(ActionEvent event) {
         try {
-            ValidationController.getInstance().registerPerson(txtFirstName.getText(), txtLastName.getText(), dataPiker.getValue().getDayOfWeek().name(), cbGenere.getValue().getGenere(), txtCpf.getText(), txtAddress.getText());
+            ValidationController.getInstance().registerPerson(txtFirstName.getText(), txtLastName.getText(), dataPiker.getValue().toString(), cbGenere.getValue().getGenere(), txtCpf.getText(), txtAddress.getText());
             try {
                 FacadeFrontend.getInstance().changeSideBar(Scenes.REGISTER_LOGIN);
             } catch (Exception ex) {
@@ -94,6 +99,17 @@ public class RegisterPersonController implements Initializable {
             NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
         }
 
+    }
+    
+    public void load(Student a){
+        txtFirstName.setText(a.getFirstName());
+        txtLastName.setText(a.getLastName());
+        dataPiker.setValue(LocalDate.parse(a.getBirth()));
+        cbGenere.getSelectionModel().select(a.getGenere());
+        txtCpf.setText(a.getCpf());
+        txtAddress.setText(a.getAddress());
+        
+        btnEdit.setVisible(true);
     }
 
     @FXML

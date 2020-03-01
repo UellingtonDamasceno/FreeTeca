@@ -90,10 +90,16 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="128.0" prefWidth="426.0" spacing="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="128.0" prefWidth="426.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
             <Button mnemonicParsing="false" onAction="#previous" onMouseEntered="#btnRetornarOnMouseEntered" text="Retornar" />
             <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" onMouseEntered="#btnAvancarOnmouseEntered" text="Avançar" />
+=======
+            <Button mnemonicParsing="false" onAction="#previous" text="Retornar" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" text="Editar" visible="false" />
+            <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" text="Avançar" />
+>>>>>>> daa35c23d47259953ab11741c1204a64d168bc14
          </children>
       </HBox>
    </bottom>

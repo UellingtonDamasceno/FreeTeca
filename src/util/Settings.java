@@ -227,5 +227,11 @@ public class Settings {
             return this.phrase;
         }
     }
+    
+    public enum Administrator{
+        
+        
+        
+    }
 
 }

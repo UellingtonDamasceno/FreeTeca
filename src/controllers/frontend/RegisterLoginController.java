@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import model.Login;
+import model.Student;
 import model.exceptions.MissingValuesException;
 import model.exceptions.PasswordWrongException;
 import util.MaskFieldUtil;
@@ -49,6 +51,8 @@ public class RegisterLoginController implements Initializable {
     private ImageView imgEye;
 
     private boolean eye, eyeConf;
+    @FXML
+    private Button btnEdit;
 
     /**
      * Initializes the controller class.
@@ -182,5 +186,12 @@ public class RegisterLoginController implements Initializable {
     @FXML
     private void lblEmailRECOnMouseEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.EMAIL_DE_RECUPERACAO.getPhrase());
+    }
+    public void load(Student a){
+        txtEmail.setText(a.getLogin().getEmail());
+        txtRecoveryEmail.setText(a.getLogin().getRecoveryEmail());
+        txtPassword.setText(a.getLogin().getPassword());
+        txtPassword1.setText(a.getLogin().getPassword());
+        btnEdit.setVisible(true);
     }
 }
