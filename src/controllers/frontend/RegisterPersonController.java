@@ -6,7 +6,6 @@ import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +19,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.util.converter.LocalDateStringConverter;
 import model.Student;
 import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
@@ -56,6 +54,8 @@ public class RegisterPersonController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
