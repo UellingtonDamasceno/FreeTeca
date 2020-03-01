@@ -55,8 +55,8 @@ public class ItemListController implements Initializable {
         Image image = new Image(Icons.BOOKS.getIconPath());
         this.imgIcon.setImage(image);
         this.lblName.setText(student.getFirstName() + " " + student.getLastName());
-        this.lblInstituation.setText(student.getInstitution().name());
-        this.lblId.setText(student.getRegistration());
+        this.lblInstituation.setText(student.getInstitution().getName());
+        this.lblId.setText("Matricula: "+ student.getRegistration());
         this.student = student;
     }
 
