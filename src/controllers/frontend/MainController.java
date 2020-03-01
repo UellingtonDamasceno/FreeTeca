@@ -84,7 +84,6 @@ public class MainController implements Initializable {
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 AudioController.getInstance().setCanReproduce(newValue);
-                imgEye.disableProperty();
             }
         });
         
@@ -125,16 +124,18 @@ public class MainController implements Initializable {
             list.add(new Image(Slider.values()[1].getImagePath()));
             list.add(new Image(Slider.values()[2].getImagePath()));
             while (activated) {
-                for (Image image : list) {
+                list.stream().map((image) -> {
                     Platform.runLater(() -> {
                         this.imageViewSlider.setImage(image);
                     });
+                    return image;
+                }).forEachOrdered((_item) -> {
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
+                });
             }
         }).start();
     }
@@ -185,33 +186,25 @@ public class MainController implements Initializable {
 
     @FXML
     private void lblEmailEntered(MouseEvent event) {
-        System.out.println("\nDentro de Email carai");
         AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
     }
 
     @FXML
     private void lblSenhaEntered(MouseEvent event) {
-        System.out.println("\nDentro de Senha carai");
         AudioController.getInstance().playAudio(Settings.Phrase.SENHA.getPhrase());
     }
 
     @FXML
     private void btnAcessibilidadeEntered(MouseEvent event) {
-        System.out.println("\nDentro de Acessibilidade");
-        if (AudioController.getInstance().getCanReproduce()){
+        if (AudioController.getInstance().getCanReproduce())
             AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
-            System.out.println("\nPode Falar.");
-        }
-        else{
+        else
             AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
-            System.out.println("Não pode falar");
-        }
     }
 
     @FXML
     private void btnConfigEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.CONFIGURACOES.getPhrase());
-        System.out.println("\nDentro de Config.");
     }
 
     @FXML
@@ -232,13 +225,11 @@ public class MainController implements Initializable {
     @FXML
     private void btnEntrarEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.ENTRAR.getPhrase());
-        System.out.println("\nDentro de Entrar");
     }
 
     @FXML
     private void lblCadastroEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.NOVO_CADASTRO.getPhrase());
-        System.out.println("\nDentro de Cadastro");
     }
 
 }

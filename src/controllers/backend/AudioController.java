@@ -14,7 +14,7 @@ import javafx.scene.media.AudioClip;
 public class AudioController {
 
     private static AudioController controller;
-    
+
     private static final String ORIGIN = "/resources/audio/";
     private static final String EXTENSION = ".wav";
     private static final String INVALID = ORIGIN + "INVALIDO" + EXTENSION;
@@ -32,26 +32,26 @@ public class AudioController {
         this.canReproduce = false;
     }
 
-    public static synchronized AudioController getInstance(){
+    public static synchronized AudioController getInstance() {
         return (controller == null) ? controller = new AudioController() : controller;
     }
-    
-    public void setCanReproduce(boolean canReproduce){
+
+    public void setCanReproduce(boolean canReproduce) {
         this.canReproduce = canReproduce;
     }
 
-    public boolean getCanReproduce(){
+    public boolean getCanReproduce() {
         return this.canReproduce;
     }
-    
+
     private String getDirectoryFile(String character) {
         return ORIGIN + character + EXTENSION;
     }
-    
-    public void playAudio(char id){
+
+    public void playAudio(char id) {
         this.playAudio(String.valueOf(id));
     }
-    
+
     public void playAudio(String id) {
         if (canReproduce) {
             id = id.toUpperCase();
@@ -61,7 +61,6 @@ public class AudioController {
                 this.addAudio(id).play();
             }
         }
-        System.out.println("Dá não, meu bom."+id);
     }
 
     public AudioClip getAudio(String id) throws NotFoundException {
@@ -75,7 +74,6 @@ public class AudioController {
     public AudioClip addAudio(String id) {
         id = id.toUpperCase();
         if (this.invalidAudios.contains(id)) {
-            System.out.println("Pegou aqui: "+ id);
             return this.invalid;
         } else {
             String path = this.getDirectoryFile(id);
