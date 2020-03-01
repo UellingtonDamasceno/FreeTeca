@@ -90,9 +90,10 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="128.0" prefWidth="426.0" spacing="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="128.0" prefWidth="426.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#previous" text="Retornar" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" text="Editar" visible="false" />
             <Button fx:id="btnNext" mnemonicParsing="false" onAction="#next" text="Avançar" />
          </children>
       </HBox>

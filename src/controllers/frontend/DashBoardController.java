@@ -33,10 +33,6 @@ public class DashBoardController implements Initializable {
     @FXML
     private Label lblName;
     @FXML
-    private Button btnManager;
-    @FXML
-    private Button btnEdit;
-    @FXML
     private Button btnList;
     @FXML
     private Button btnLeave;

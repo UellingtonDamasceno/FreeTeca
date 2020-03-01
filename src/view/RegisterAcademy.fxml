@@ -58,11 +58,12 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="128.0" prefWidth="200.0" spacing="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="128.0" prefWidth="200.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
 
-            <Button fx:id="btnReturn" mnemonicParsing="false" onMouseEntered="#btnRetornarMouseEntered" onAction="#returning" text="Retornar" />
-            <Button fx:id="btnSave" mnemonicParsing="false" onMouseEntered="#btnSalvarMouseEntered" onAction="#save" text="Salvar" />
+            <Button fx:id="btnReturn" mnemonicParsing="false" onAction="#returning" onMouseEntered="#btnRetornarMouseEntered" text="Retornar" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" text="Editar" visible="false" />
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" onMouseEntered="#btnSalvarMouseEntered" text="Salvar" />
          </children>
       </HBox>
    </bottom>
