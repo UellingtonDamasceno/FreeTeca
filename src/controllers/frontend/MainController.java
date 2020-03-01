@@ -98,12 +98,9 @@ public class MainController implements Initializable {
         });
         this.btnAccessbility.setOnMouseEntered((event) -> {
             AudioController.getInstance().setCanReproduce(true);
-            
-            
             if (btnAccessbility.isSelected())
                 AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
             else{
-                System.out.println("DAle");
                 AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
                 AudioController.getInstance().setCanReproduce(false);
             }
@@ -224,17 +221,18 @@ public class MainController implements Initializable {
 
     @FXML
     private void txtEmailEntered(MouseEvent event) {
-        
+        AudioController.getInstance().playAudio(Settings.Phrase.INSERIREMAIL.getPhrase());
     }
 
     @FXML
     private void txtSenhaEntered(MouseEvent event) {
-        
+        AudioController.getInstance().playAudio(Settings.Phrase.INSERIRSENHA.getPhrase());
     }
 
     @FXML
     private void lblErrorEntered(MouseEvent event) {
-        
+        if(lblInfo.isDisabled())
+            AudioController.getInstance().playAudio(Settings.Phrase.ERROLOGIN.getPhrase());
     }
 
     @FXML

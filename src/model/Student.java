@@ -17,9 +17,8 @@ public class Student extends LogablePerson{
     private Instituition institution;
     private String registration;
     private Course course;
-    private Login login;
+    private Login login;       
 
-    
     public List<String> getPhone() {
         return phone;
     }

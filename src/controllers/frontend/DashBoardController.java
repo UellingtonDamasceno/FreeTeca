@@ -81,7 +81,7 @@ public class DashBoardController implements Initializable {
     @FXML
     private void previous(ActionEvent event) {
         try {
-            FacadeFrontend.getInstance().changeScreean(Scenes.HOME_SIDE);
+            FacadeFrontend.getInstance().changeScreean(Scenes.MAIN);
         } catch (Exception ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 package controllers.frontend;
 
 import DAO.StudentDAO;
+import controllers.backend.NotificationsController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.sql.SQLException;
@@ -56,6 +57,7 @@ public class ItemListController implements Initializable {
         this.lblName.setText(student.getFirstName() + " " + student.getLastName());
         this.lblInstituation.setText(student.getInstitution().name());
         this.lblId.setText(student.getRegistration());
+        this.student = student;
     }
 
     @FXML
@@ -64,15 +66,16 @@ public class ItemListController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event) {
-//        try {
-//            StudentDAO studentDAO = new StudentDAO();
-//            studentDAO.delete(student);
+        try {
+            StudentDAO studentDAO = new StudentDAO();
+            studentDAO.delete(student);
+            NotificationsController.getInstance().sucessNotification("Sucesso!", "Aluno: "+ student.getFirstName() + "Foi deletado com sucesso!");
             FacadeFrontend.getInstance().removeItemList(this.root);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(ItemListController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ItemListController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ItemListController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

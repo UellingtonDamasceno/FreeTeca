@@ -1,6 +1,6 @@
 package controllers.frontend;
 
-import controllers.backend.NotificationsController;
+import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.exceptions.MissingValuesException;
 import util.MaskFieldUtil;
 import util.Settings.Genere;
 import util.Settings.Scenes;
@@ -60,8 +61,8 @@ public class RegisterPersonController implements Initializable {
     }
 
     @FXML
-    private void previous(ActionEvent event) {
-        try {
+    private void previous(ActionEvent event){      
+        try {            
             FacadeFrontend.getInstance().changeSideBar(Scenes.HOME_SIDE);
         } catch (Exception ex) {
             Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +71,11 @@ public class RegisterPersonController implements Initializable {
 
     @FXML
     private void next(ActionEvent event) {
+        try {
+            ValidationController.getInstance().registerPerson(txtFirstName.getText(), txtLastName.getText(), dataPiker.getValue().getDayOfWeek().name(), cbGenere.getValue().getGenere(), txtCpf.getText(), txtAddress.getText());
+        } catch (MissingValuesException ex) {
+            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             FacadeFrontend.getInstance().changeSideBar(Scenes.REGISTER_LOGIN);
         } catch (Exception ex) {

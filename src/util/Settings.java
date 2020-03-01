@@ -18,10 +18,10 @@ public class Settings {
         REGISTER_PERSON("RegisterPerson.fxml", "Registro", true),
         REGISTER_LOGIN("RegisterLogin.fxml", "Login", true),
         REGISTER_ACADEMY("RegisterAcademy.fxml", "Academy", true),
-        DASHBOARD("DashBoard.fxml","Dash", false),
+        DASHBOARD("DashBoard.fxml", "Dash", false),
         ITEM_LIST("ItemList.fxml", "Item", true),
         LIST("List.fxml", "List", true);
-        
+
         private final String name;
         private final String title;
         private final boolean cache;
@@ -51,7 +51,7 @@ public class Settings {
         CLOSED_EYE("closed_eye"),
         SLEEPY_EYE("sleepy_eye"),
         EYE("eye");
-        
+
         private final String name;
         private final String ORIGIN = "/resources/icons/";
         private final String EXTENSION = ".png";
@@ -99,34 +99,47 @@ public class Settings {
         private String getName() {
             return this.name;
         }
-             
+
     }
 
     //Complementar com cursos
     public enum Course {
         ECOMP("Engenharia de Computação"),
-        ECIVIL("Engenharia Civil"),
-        EALIM("Engenharia Alimentos");
-
+        CIVIL("Engenharia Civil"),
+        ENGAL("Engenharia Alimentos");
 
         private String name;
 
         private Course(String name) {
             this.name = name;
         }
-        
-        public String getName(){
+
+        public static Course getCourse(String name) {
+            switch (name) {
+                case "Engenharia de Computação":
+                    return ECOMP;
+                case "Engenharia Civil":
+                    return CIVIL;
+                case "Engenharia de Alimentos":
+                    return ENGAL;
+                default:
+                    throw new AssertionError();
+            }
+        }
+
+        public String getName() {
             return this.name;
         }
 
     }
 
     public enum Genere {
-        MASCULINO("M"),
-        FEMININO("F"),
-        OUTRO("O");
+        MASCULINO("MASCULINO"),
+        FEMININO("FEMININO"),
+        OUTRO("OUTRO");
 
         private final String genere;
+
         private Genere(String genere) {
             this.genere = genere;
         }
@@ -135,8 +148,8 @@ public class Settings {
             return this.genere;
         }
     }
-    
-    public enum Phrase{
+
+    public enum Phrase {
         AVANCAR("AVANÇAR"),
         NOVO_CADASTRO("CADASTROAQUI"),
         CONFIGURACOES("CONFIG"),
@@ -163,16 +176,20 @@ public class Settings {
         SEXO("SEXO"),
         VISUALIZAR("VISUALIZAR"),
         EMAIL("EMAIL"),
+        ERROLOGIN("ERROLOGIN"),
+        INSERIRSENHA("INSERIRSENHA"),
+        INSERIREMAIL("INSERIREMAIL"),
         XD("XD");
-        
-        private final String phrase;       
-        private Phrase(String phrase){
+
+        private final String phrase;
+
+        private Phrase(String phrase) {
             this.phrase = phrase;
         }
-        
+
         public String getPhrase() {
             return this.phrase;
         }
     }
-           
+
 }

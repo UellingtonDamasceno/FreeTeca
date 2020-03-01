@@ -31,7 +31,7 @@ public class StudentDAO {
             System.out.println(stmt.toString());
             stmt.setString(1, a.getFirstName());
             stmt.setString(2, a.getLastName());
-            stmt.setString(3, a.getCpf());
+            stmt.setInt(3, Integer.parseInt(a.getCpf()));
             stmt.setString(4, a.getAddress());
             stmt.setString(5, String.valueOf(a.getGenere()));
             stmt.setString(6, String.valueOf(a.getInstitution()));
@@ -86,15 +86,20 @@ public class StudentDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-
-    // chave primaria/ pesquisa para o registro
-    public boolean delete(Student a) throws ClassNotFoundException, SQLException {
+    
+    public boolean delete(Student a) throws ClassNotFoundException, SQLException{
+        return delete(a.getCpf());
+    }
+    
+    // chave primaria/ delete para o registro
+    public boolean delete(String cpf) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("DELETE FROM alunos WHERE registration = ?");
+            stmt = con.prepareStatement("DELETE FROM alunos WHERE cpf = ?");
+            
+            stmt.setString(1, cpf);
             System.out.println(stmt.toString());
-            stmt.setString(1, String.valueOf(a.getInstitution()));
             stmt.executeUpdate();
             System.out.println("Deletado com sucesso");
             return true;

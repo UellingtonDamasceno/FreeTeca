@@ -5,13 +5,12 @@
  */
 package controllers.frontend;
 
-import controllers.backend.NotificationsController;
+import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +20,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.exceptions.MissingValuesException;
+import model.exceptions.PasswordWrongException;
 import util.MaskFieldUtil;
 import util.Settings;
 import util.Settings.Icons;
@@ -133,7 +134,18 @@ public class RegisterLoginController implements Initializable {
 
     @FXML
     private void next(ActionEvent event) {
+        
         try {
+            try {
+                ValidationController.getInstance().registerLogin(txtEmail.getText(), txtPassword.getText(), txtPassword1.getText(), txtRecoveryEmail.getText());
+            } catch (PasswordWrongException ex) {
+                Logger.getLogger(RegisterLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (MissingValuesException ex) {
+            Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {            
             FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.REGISTER_ACADEMY);
         } catch (Exception ex) {
             Logger.getLogger(RegisterPersonController.class.getName()).log(Level.SEVERE, null, ex);
