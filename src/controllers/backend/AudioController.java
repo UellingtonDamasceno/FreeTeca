@@ -56,21 +56,21 @@ public class AudioController {
 
     public void playAudio(String id) {
         if (canReproduce) {
-            new Thread(() -> {
-                canReproduce = false;
-                try {
-                    Thread.sleep(100000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AudioController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }).start();
+//            new Thread(() -> {
+//                canReproduce = false;
+//                try {
+//                    Thread.sleep(100000);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(AudioController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }).start();
             id = id.toUpperCase();
             try {
                 this.getAudio(id).play();
             } catch (NotFoundException ex) {
                 this.addAudio(id).play();
             }
-            canReproduce = true;
+//            canReproduce = true;
         }
     }
 
