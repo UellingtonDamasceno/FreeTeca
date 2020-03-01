@@ -162,7 +162,7 @@ public class AdministratorDAO {
                 String lastName = rs.getString("lastName");
 
                 String CPF = rs.getString("cpf");
-                Settings.Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMININO;
+                Settings.Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO :Genere.FEMININO;
                 String endereco = rs.getString("andress");
 
             
