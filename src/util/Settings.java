@@ -98,7 +98,7 @@ public class Settings {
             this.name = name;
         }
 
-        private String getName() {
+        public String getName() {
             return this.name;
         }
 
