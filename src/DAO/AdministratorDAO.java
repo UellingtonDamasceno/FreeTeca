@@ -193,7 +193,7 @@ public class AdministratorDAO {
 
                 
             } else {
-                throw new RuntimeException("A pesquisa não retronou nenhum resultado!");
+                throw new RuntimeException("A pesquisa não retornou nenhum resultado!");
             }
             return admin;
         } catch (SQLException ex) {
