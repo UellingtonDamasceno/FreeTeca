@@ -58,9 +58,8 @@ public class ValidationController {
             temp.setAddress(adress);
             temp.setBirth(birth);
             temp.setGenere(Settings.Genere.valueOf(gender));
-
-            cpf = cpf.replaceAll(".", "");
-            cpf = cpf.replaceAll("-", "");
+            cpf = cpf.replaceAll("\\.", "");
+            cpf = cpf.replace("-", "");
             temp.setCpf(cpf);
         }
     }
