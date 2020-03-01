@@ -198,14 +198,16 @@ public class Settings {
         INSTITUICAOENSINO("INSTITUICAOENSINO"),
         INSERIRMATRICULA("INSERIRMATRICULA"),
         XD("XD"),
-        //Áudios para gravar.
-
         MASCULINO("MASCULINO"),
         FEMININO("FEMININO"),
         OUTRO("OUTRO"),
-        ENGAL("SALVAR"),
-        CIVIL("CURSO"),
-        ECOMP("XD");
+        ENGAL("ENGAL"),
+        CIVIL("CIVIL"),
+        ECOMP("ECOMP"),
+        FAT("FAT"),
+        UNEF("UNEF"),
+        UNEB("UNEB"),
+        UEFS("UEFS");
 
         private final String phrase;
 
