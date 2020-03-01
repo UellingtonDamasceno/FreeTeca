@@ -1,5 +1,6 @@
 package controllers.frontend;
 
+import controllers.backend.NotificationsController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,7 +54,7 @@ public class RegisterPersonController implements Initializable {
         MaskFieldUtil.reproducer(txtFirstName);
         MaskFieldUtil.reproducer(txtLastName);
         MaskFieldUtil.reproducer(txtAddress);
-        
+
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(dataPiker.getEditor());
     }

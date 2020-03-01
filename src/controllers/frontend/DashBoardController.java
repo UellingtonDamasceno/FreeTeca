@@ -5,8 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,8 +51,37 @@ public class DashBoardController implements Initializable {
 
     private void initialize() {
         try {
-            Parent loadedScreen = FacadeFrontend.getInstance().getScreen(Scenes.LIST);
+            FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.LIST);
+            Parent loadedScreen = loader.load();
+            FacadeFrontend.getInstance().setListController(loader.getController());
             this.vboxRoot.getChildren().add(loadedScreen);
+        } catch (Exception ex) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void changeCenter(Scenes scene) {
+        this.changeContent(this.vboxRoot, scene);
+    }
+
+    public void changeSide(Scenes scene) {
+        this.changeContent(this.vboxSide, scene);
+    }
+
+    private void changeContent(VBox vbox, Scenes scene) {
+        try {
+            Parent loadedScreen = FacadeFrontend.getInstance().getScreen(scene);
+            vbox.getChildren().clear();
+            vbox.getChildren().add(loadedScreen);
+        } catch (Exception ex) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void previous(ActionEvent event) {
+        try {
+            FacadeFrontend.getInstance().changeScreean(Scenes.HOME_SIDE);
         } catch (Exception ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }

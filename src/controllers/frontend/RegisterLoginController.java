@@ -5,6 +5,7 @@
  */
 package controllers.frontend;
 
+import controllers.backend.NotificationsController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,7 +61,7 @@ public class RegisterLoginController implements Initializable {
 
         this.eye = true;
         this.eyeConf = true;
-        
+
         this.setEyeEffect();
     }
 

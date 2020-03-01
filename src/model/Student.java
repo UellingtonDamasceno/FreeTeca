@@ -19,10 +19,7 @@ public class Student extends LogablePerson{
     private Course course;
     private Login login;
 
- 
     
-    
-
     public List<String> getPhone() {
         return phone;
     }
