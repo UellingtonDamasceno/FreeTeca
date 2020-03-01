@@ -16,7 +16,7 @@
          <children>
             <VBox prefHeight="60.0" prefWidth="426.0" spacing="5.0">
                <children>
-                  <Label text="Instituição de Ensino">
+                  <Label onMouseEntered="#lblAcademyMouseEntered" text="Instituição de Ensino">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -29,7 +29,7 @@
             </VBox>
             <VBox prefHeight="60.0" prefWidth="426.0" spacing="5.0">
                <children>
-                  <Label text="Curso">
+                  <Label onMouseEntered="#lblCursoMouseEntered" text="Curso">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -42,12 +42,12 @@
             </VBox>
             <VBox prefHeight="60.0" prefWidth="426.0" spacing="5.0">
                <children>
-                  <Label text="Matrícula">
+                  <Label onMouseEntered="#lblMatriculaMouseEntered" text="Matrícula">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtID" prefHeight="37.0" prefWidth="353.0" styleClass="text-field" />
+                  <TextField fx:id="txtID" onMouseEntered="#txtFieldMatriculaMouseEntered" prefHeight="37.0" prefWidth="353.0" styleClass="text-field" />
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
@@ -60,13 +60,13 @@
    <bottom>
       <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="128.0" prefWidth="200.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnReturn" mnemonicParsing="false" text="Retornar" />
-            <Button fx:id="btnSave" mnemonicParsing="false" text="Salvar" />
+            <Button fx:id="btnReturn" mnemonicParsing="false" onMouseEntered="#btnRetornarMouseEntered" text="Retornar" />
+            <Button fx:id="btnSave" mnemonicParsing="false" onMouseEntered="#btnSalvarMouseEntered" text="Salvar" />
          </children>
       </HBox>
    </bottom>
    <top>
-      <VBox alignment="CENTER" prefHeight="138.0" prefWidth="426.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" onMouseEntered="#infoAcademy" prefHeight="138.0" prefWidth="426.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" styleClass="label-header" text="Informações" />
             <Label styleClass="label-header" text="Acadêmicas" />

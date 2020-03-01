@@ -104,31 +104,39 @@ public class Settings {
 
     //Complementar com cursos
     public enum Course {
-        ECOMP("Engenharia de Computação"),
-        ECIVIL("Engenharia Civil"),
-        EALIM("Engenharia Alimentos");
+        ECOMP("Engenharia de Computação", Phrase.ECOMP),
+        ECIVIL("Engenharia Civil", Phrase.ECIVIL),
+        ENGAL("Engenharia Alimentos", Phrase.ENGAL);
 
 
-        private String name;
+        private final String name;
+        private final Phrase curso;
 
-        private Course(String name) {
+        private Course(String name, Phrase curso) {
             this.name = name;
+            this.curso = curso;
         }
         
         public String getName(){
             return this.name;
         }
+        
+        public String getCurso(){
+            return this.curso.getPhrase();
+        }
 
     }
 
     public enum Genere {
-        MASCULINO("M"),
-        FEMININO("F"),
-        OUTRO("O");
+        MASCULINO("M", Phrase.MASCULINO),
+        FEMININO("F", Phrase.FEMININO),
+        OUTRO("O", Phrase.OUTRO);
 
         private final String genere;
-        private Genere(String genere) {
+        private final Phrase sexo;
+        private Genere(String genere, Phrase sexo) {
             this.genere = genere;
+            this.sexo = sexo;
         }
 
         public String getGenere() {
@@ -166,7 +174,22 @@ public class Settings {
         ERROLOGIN("ERROLOGIN"),
         INSERIRSENHA("INSERIRSENHA"),
         INSERIREMAIL("INSERIREMAIL"),
-        XD("XD");
+        ACADEMYINFO("ACADEMYINFO"),
+        MATRICULAA("MATRICULAA"),
+        SALVAR("SALVAR"),
+        CURSO("CURSO"),
+        INSTITUICAOENSINO("INSTITUICAOENSINO"),
+        INSERIRMATRICULA("INSERIRMATRICULA"),
+        XD("XD"),
+        
+        //Áudios para gravar.
+        
+        MASCULINO("MASCULINO"),
+        FEMININO("FEMININO"),
+        OUTRO("OUTRO"), 
+        ENGAL("SALVAR"),
+        ECIVIL("CURSO"),
+        ECOMP("XD");
         
         private final String phrase;       
         private Phrase(String phrase){

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.media.AudioClip;
 
 /**
@@ -54,12 +56,21 @@ public class AudioController {
 
     public void playAudio(String id) {
         if (canReproduce) {
+            new Thread(() -> {
+                canReproduce = false;
+                try {
+                    Thread.sleep(100000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AudioController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }).start();
             id = id.toUpperCase();
             try {
                 this.getAudio(id).play();
             } catch (NotFoundException ex) {
                 this.addAudio(id).play();
             }
+            canReproduce = true;
         }
     }
 
