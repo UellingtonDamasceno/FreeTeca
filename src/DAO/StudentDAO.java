@@ -1,6 +1,5 @@
 package DAO;
 
-
 import connections.ConnectionFactory;
 
 import java.sql.Connection;
@@ -21,12 +20,11 @@ import util.Settings.Instituition;
  * @author Uellington Damasceno
  */
 public class StudentDAO {
+
     //criacao de um estudande no banco de dados
     public boolean create(Student a) throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
-        
         try {
             stmt = con.prepareStatement("INSERT INTO alunos (firstName, lastName, cpf, andress, sexo, institution, course, registration, email, recoveryEmail, password)"
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -42,14 +40,10 @@ public class StudentDAO {
             stmt.setString(9, a.getLogin().getEmail());
             stmt.setString(10, a.getLogin().getRecoveryEmail());
             stmt.setString(11, a.getLogin().getPassword());
-            
-            if(!String a.getCpf().matches("[0-9]*")){
-          	    System.out.println("Cpf inv·lido!");
-            }else {    
-               System.out.println(stmt.toString());
-               stmt.executeUpdate();
-            }
-               
+
+            System.out.println(stmt.toString());
+            stmt.executeUpdate();
+
             return true;
         } catch (SQLException ex) {
             System.out.println("Entrou aki no SQLException: " + ex.getMessage());
@@ -119,52 +113,43 @@ public class StudentDAO {
         PreparedStatement stmt = con.prepareStatement("SELECT * FROM alunos");
         ResultSet rs = stmt.executeQuery();
         LinkedList alunos = new LinkedList();
-       
+
         while (rs.next()) {
-            
-            String firstName = rs.getString("firstName");
+
+            String firstName = rs.getString("firsName");
             String lastName = rs.getString("lastName");
-            
+
             String CPF = rs.getString("cpf");
             Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMININO;
             String endereco = rs.getString("andress");
-            
-            String instituicao = rs.getString("institution");
-            
-                    
-            String curso = rs.getString("course");
-            
-            String matricula =  rs.getString("registration");
-            
+
+            Object instituicao = rs.getString("institution");
+
+            Object curso = rs.getString("course");
+
+            Object matricula = rs.getString("registration");
+
             String email = rs.getString("email");
-            
+
             String recoveryemail = rs.getString("recoveryemail");
-            
+
             String password = rs.getString("password");
-            
-            
-            
+
             Student aluno = new Student();
-            
+
             aluno.setFirstName(firstName);
             aluno.setLastName(lastName);
-            aluno.setCpf(CPF);
-            aluno.setGenere(genero);
             aluno.setAddress(endereco);
-            
-            
-            aluno.setInstitution(Instituition.valueOf(instituicao));
 
-            aluno.setCourse(Course.valueOf(curso));
-            
-            aluno.setRegistration(matricula);
-            
-           Login ls = new Login(email, recoveryemail, password);
-           
-           aluno.setLogin(ls);
-            
-            
-            
+            aluno.setInstitution((Instituition) instituicao);
+
+            aluno.setCourse((Course) curso);
+
+            aluno.setRegistration((String) matricula);
+
+            Login login = new Login(email, recoveryemail, password);
+            aluno.setLogin(login);
+
             alunos.add(aluno);
         }
         ConnectionFactory.closeConnection(con, stmt, rs);
@@ -180,22 +165,20 @@ public class StudentDAO {
             stmt = con.prepareStatement("SELECT * FROM alunos WHERE cpf = ?");
             stmt.setString(1, cpf);
             rs = stmt.executeQuery();
-          
-            if (rs.next()) {
 
-                String firstName = rs.getString("firstName");
+            if (rs.next()) {
+                String firstName = rs.getString("firsName");
                 String lastName = rs.getString("lastName");
 
                 String CPF = rs.getString("cpf");
-                Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO: Genere.FEMININO;
+                Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO : Genere.FEMININO;
                 String endereco = rs.getString("andress");
 
-                String instituicao = rs.getString("institution");
+                Object instituicao = rs.getString("institution");
 
+                Object curso = rs.getString("course");
 
-                String curso = rs.getString("course");
-
-                String matricula =  rs.getString("registration");
+                Object matricula = rs.getString("registration");
 
                 String email = rs.getString("email");
 
@@ -203,28 +186,20 @@ public class StudentDAO {
 
                 String password = rs.getString("password");
 
-
-
                 aluno = new Student();
 
                 aluno.setFirstName(firstName);
                 aluno.setLastName(lastName);
-                aluno.setCpf(CPF);
-                aluno.setGenere(genero);
                 aluno.setAddress(endereco);
 
-            
-                
-               aluno.setInstitution(Instituition.valueOf(instituicao));
+                aluno.setInstitution((Instituition) instituicao);
 
-               aluno.setCourse(Course.valueOf(curso));
+                aluno.setCourse((Course) curso);
 
-                aluno.setRegistration(matricula);
+                aluno.setRegistration((String) matricula);
+                Login login = new Login(email, recoveryemail, password);
+                aluno.setLogin(login);
 
-                Login ls = new Login(email, recoveryemail, password);
-
-                aluno.setLogin(ls);
-                
             } else {
                 throw new RuntimeException("A pesquisa n√£o retronou nenhum resultado!");
             }
@@ -235,6 +210,5 @@ public class StudentDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return aluno;
-    }	
+    }
 }
-    
