@@ -40,6 +40,10 @@ public class AudioController {
         this.canReproduce = canReproduce;
     }
 
+    public boolean getCanReproduce(){
+        return this.canReproduce;
+    }
+    
     private String getDirectoryFile(String character) {
         return ORIGIN + character + EXTENSION;
     }
@@ -57,6 +61,7 @@ public class AudioController {
                 this.addAudio(id).play();
             }
         }
+        System.out.println("Dá não, meu bom."+id);
     }
 
     public AudioClip getAudio(String id) throws NotFoundException {
@@ -70,6 +75,7 @@ public class AudioController {
     public AudioClip addAudio(String id) {
         id = id.toUpperCase();
         if (this.invalidAudios.contains(id)) {
+            System.out.println("Pegou aqui: "+ id);
             return this.invalid;
         } else {
             String path = this.getDirectoryFile(id);
