@@ -42,7 +42,7 @@
                                  <children>
                                     <ToggleButton fx:id="btnAccessbility" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-image">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" onMouseEntered="#btnAcessibilidadeEntered" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="ImageAcessibilidade" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../resources/icons/accessibility.png" />
                                              </image>
