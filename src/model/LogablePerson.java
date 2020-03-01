@@ -6,7 +6,7 @@ package model;
  */
 public abstract class LogablePerson extends Person {
 
-    private Login login;
+    protected Login login;
     
     public void updateRecoveryEmail(String newEmail){
         this.login.setRecoveryEmail(newEmail);

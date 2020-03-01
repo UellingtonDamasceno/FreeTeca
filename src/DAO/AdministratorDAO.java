@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Administrator;
 import model.Login;
+import model.exceptions.NotFoundException;
 import util.Settings;
 import util.Settings.Genere;
 
@@ -55,7 +56,7 @@ public class AdministratorDAO {
         PreparedStatement stmt = null;
         try {
             //name, cpf, sexo, andress, income, institution, course, half, registration, status
-            stmt = con.prepareStatement("UPDATE administratores SET firstName = ?, lastName = ?, cpf = ?, andress = ?,"
+            stmt = con.prepareStatement("UPDATE adminstradores SET firstName = ?, lastName = ?, cpf = ?, andress = ?,"
                     + " sexo = ?, email = ?, recoveryemail = ? password = ? ");
             System.out.println(stmt.toString());
             stmt.setString(1, a.getFirstName());
@@ -90,7 +91,7 @@ public class AdministratorDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("DELETE FROM administratores WHERE cpf = ?");
+            stmt = con.prepareStatement("DELETE FROM administradores WHERE cpf = ?");
             
             stmt.setString(1, cpf);
             System.out.println(stmt.toString());
@@ -109,13 +110,13 @@ public class AdministratorDAO {
 
     public LinkedList<Administrator> read() throws ClassNotFoundException, SQLException {
         Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = con.prepareStatement("SELECT * FROM administratores");
+        PreparedStatement stmt = con.prepareStatement("SELECT * FROM administradores");
         ResultSet rs = stmt.executeQuery();
-        LinkedList administratores = new LinkedList();
+        LinkedList adminstradores = new LinkedList();
        
         while (rs.next()) {
             
-            String firstName = rs.getString("firtsName");
+            String firstName = rs.getString("firstName");
             String lastName = rs.getString("lastName");
             
             String CPF = rs.getString("cpf");
@@ -146,54 +147,46 @@ public class AdministratorDAO {
             
             
             
-            administratores.add(admin);
+            adminstradores.add(admin);
         }
         ConnectionFactory.closeConnection(con, stmt, rs);
-        return administratores;
+        return adminstradores;
     }
 
-    public Administrator readAdminForCPF(String cpf) throws ClassNotFoundException, SQLException {
+    public Administrator readAdminForEmail(String email) throws ClassNotFoundException, SQLException, NotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Administrator admin = null;
         try {
-            stmt = con.prepareStatement("SELECT * FROM administratores WHERE cpf = ?");
-            stmt.setString(1, cpf);
+            stmt = con.prepareStatement("SELECT * FROM adminstradores WHERE email = ?");
+            stmt.setString(1, email);
             rs = stmt.executeQuery();
-          
             if (rs.next()) {
-                String firstName = rs.getString("firtsName");
+                String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
 
                 String CPF = rs.getString("cpf");
                 Settings.Genere genero = (rs.getString("sexo").charAt(0) == 'M') ? Genere.MASCULINO :Genere.FEMININO;
                 String endereco = rs.getString("andress");
 
-            
-
-                String email = rs.getString("email");
-
                 String recoveryemail = rs.getString("recoveryemail");
-
                 String password = rs.getString("password");
-                
                 admin= new Administrator();
-            
+
                 admin.setFirstName(firstName);
                 admin.setLastName(lastName);
                 admin.setCpf(CPF);
                 admin.setGenere(genero);
                 admin.setAddress(endereco);
 
-
                Login ls = new Login(email, recoveryemail, password);
 
                admin.setLogin(ls);
 
-                
             } else {
-                throw new RuntimeException("A pesquisa não retornou nenhum resultado!");
+
+                throw new NotFoundException();
             }
             return admin;
         } catch (SQLException ex) {

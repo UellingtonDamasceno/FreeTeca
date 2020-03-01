@@ -76,7 +76,6 @@ public class RegisterPersonController implements Initializable {
     @FXML
     private void next(ActionEvent event) {
         try {
-            System.out.println(txtFirstName.getText());
             ValidationController.getInstance().registerPerson(txtFirstName.getText(), txtLastName.getText(), dataPiker.getValue().getDayOfWeek().name(), cbGenere.getValue().getGenere(), txtCpf.getText(), txtAddress.getText());
             try {
                 FacadeFrontend.getInstance().changeSideBar(Scenes.REGISTER_LOGIN);
