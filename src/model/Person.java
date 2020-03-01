@@ -11,7 +11,7 @@ public abstract class Person {
     
     protected String firstName;
     protected String lastName;
-    protected Date birth;
+    protected String birth;
     protected Genere genere;
     
     protected String cpf;
@@ -58,11 +58,11 @@ public abstract class Person {
         this.cpf = cpf;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

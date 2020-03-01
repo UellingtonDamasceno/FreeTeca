@@ -31,7 +31,7 @@ public class StudentDAO {
             System.out.println(stmt.toString());
             stmt.setString(1, a.getFirstName());
             stmt.setString(2, a.getLastName());
-            stmt.setString(3, a.getCpf());
+            stmt.setInt(3, Integer.parseInt(a.getCpf()));
             stmt.setString(4, a.getAddress());
             stmt.setString(5, String.valueOf(a.getGenere()));
             stmt.setString(6, String.valueOf(a.getInstitution()));
