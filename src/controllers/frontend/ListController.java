@@ -1,6 +1,7 @@
 package controllers.frontend;
 
 import DAO.StudentDAO;
+import controllers.backend.NotificationsController;
 import facade.FacadeFrontend;
 import java.io.IOException;
 import java.net.URL;
@@ -29,40 +30,35 @@ public class ListController implements Initializable {
     @FXML
     private VBox vboxList;
 
-    private List<Parent> itemLists;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        itemLists = new LinkedList();
         this.initialize();
     }
 
     private void initialize() {
         StudentDAO studentDAO = new StudentDAO();
-
         try {
             List<Student> students = studentDAO.read();
-            for (Student student : students) {
+            students.forEach((student) -> {
                 FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.ITEM_LIST);
                 try {
                     Parent loadedScreen = loader.load();
-                    ItemListController itemController = loader.getController();//To ouvindo a musica 
+                    ItemListController itemController = loader.getController();
                     itemController.loadStudent(student);
-                    itemLists.add(loadedScreen);
                     Platform.runLater(() -> {
-                    vboxList.getChildren().add(loadedScreen);
+                        vboxList.getChildren().add(loadedScreen);
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+            });
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Aconteceu um erro inesperado!", "Você nunca deveria ter visto esse erro!");
         } catch (SQLException ex) {
-            Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
+            NotificationsController.getInstance().errorNotification("Você está conectado?", "Verifique sua rede e tente novamente!");
         }
     }
 

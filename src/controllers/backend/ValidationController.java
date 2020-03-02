@@ -32,19 +32,14 @@ public class ValidationController {
     public static synchronized ValidationController getInstance() {
         return (validation == null) ? validation = new ValidationController() : validation;
     }
-
+    
     public LogablePerson login(String email, String password) throws MissingValuesException, SQLException, ClassNotFoundException, NotFoundException {
         if (email.isEmpty() || password.isEmpty()) {
             throw new MissingValuesException("Nem todos os campos foram preenchidos!");
         } else {
-//            try {
-                StudentDAO studentDAO = new StudentDAO();
-                Student student = studentDAO.readStudentForEmail(email);
-                return student;
-//            } catch (NotFoundException ex) {
-//                AdministratorDAO a = new AdministratorDAO();
-//                return a.readAdminForEmail(email);
-//            }
+            StudentDAO studentDAO = new StudentDAO();
+            Student student = studentDAO.readStudentForEmail(email);
+            return student;
         }
     }
 

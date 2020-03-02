@@ -2,10 +2,12 @@ package controllers.frontend;
 
 import controllers.backend.AudioController;
 import controllers.backend.NotificationsController;
+import controllers.backend.SessionController;
 import controllers.backend.ValidationController;
 import facade.FacadeFrontend;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -76,6 +78,8 @@ public class MainController implements Initializable {
     @FXML
     private ImageView ImageAcessibilidade;
 
+    private LogablePerson user = null;
+
     /**
      * Initializes the controller class.
      *
@@ -89,7 +93,7 @@ public class MainController implements Initializable {
         this.eye = true;
         this.imageViewSlider.setImage(new Image(Slider.FIRST.getImagePath()));
         this.setAllBinds();
-//        this.startSlide();
+        this.startSlide();
     }
 
     private void setAllBinds() {
@@ -149,10 +153,10 @@ public class MainController implements Initializable {
         this.activated = true;
         new Thread(() -> {
             LinkedList<Image> list = new LinkedList();
-            list.add(new Image(Slider.values()[0].getImagePath()));
-            list.add(new Image(Slider.values()[1].getImagePath()));
-            list.add(new Image(Slider.values()[2].getImagePath()));
-            while (activated) {
+            for (Slider value : Slider.values()) {
+                list.add(new Image(value.getImagePath()));
+            }
+            while (this.activated && this.homePanel.getScene().getWindow().isShowing()) {
                 list.stream().map((image) -> {
                     Platform.runLater(() -> {
                         this.imageViewSlider.setImage(image);
@@ -206,39 +210,71 @@ public class MainController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) {
-        try {
-            if (this.txtEmail.getText().equals(Admin.EMAIL.getValue())) {
-                if (this.txtPassword.getText().equals(Admin.PASSWORD.getValue())) {
-                    this.nextScene(null);
+        new Thread(() -> {
+            try {
+                if (this.txtEmail.getText().equals(Admin.EMAIL.getValue())) {
+                    if (this.txtPassword.getText().equals(Admin.PASSWORD.getValue())) {
+                        SessionController.getInstance().setUser(null);
+                        Platform.runLater(() -> {
+                            try {
+                                this.activated = false;
+                                FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+                            } catch (Exception ex) {
+                                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                    } else {
+                        NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                    }
                 } else {
-                    NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                    Platform.runLater(() -> {
+                        this.lblInfo.setText("Aguarde, estamos preparando tudo!");
+                        this.btnEntry.setDisable(true);
+                    });
+                    try {
+                        user = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
+                    } catch (MissingValuesException ex) {
+                        Platform.runLater(() -> {
+                            this.btnEntry.setDisable(false);
+                        });
+                        NotificationsController.getInstance().errorNotification("Campo vazio.", ex.getMessage());
+                    } catch (NotFoundException ex) {
+                        Platform.runLater(() -> {
+                            this.btnEntry.setDisable(false);
+                        });
+                        NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n" + this.txtEmail.getText());
+                    } catch (SQLException ex) {
+                        Platform.runLater(() -> {
+                            this.btnEntry.setDisable(false);
+                        });
+                        NotificationsController.getInstance().errorNotification("Você está conectado?", "Verifique sua rede e tente novamente!");
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.lblInfo.setText("");
+
+                    if (user.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
+                        SessionController.getInstance().setUser(user);
+                        Platform.runLater(() -> {
+                            try {
+                                this.activated = false;
+                                FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+                            } catch (Exception ex) {
+                                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            this.btnEntry.setDisable(false);
+                        });
+                        NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                    }
                 }
-            } else {
-                LogablePerson person = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
-                if (person.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
-                    this.nextScene(person);
-                } else {
-                    NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
-                }
+            } catch (Exception ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (MissingValuesException ex) {
-            NotificationsController.getInstance().errorNotification("Campo vazio.", ex.getMessage());
-        } catch (NotFoundException ex) {
-            NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n" + this.txtEmail.getText());
-        } catch (Exception ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-
-    private void nextScene(Person person) throws IOException, Exception {
-        FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.DASHBOARD);
-        Parent loadedScreen = loader.load();
-        Object controller = loader.getController();
-        FacadeFrontend.getInstance().setDashBoardController(controller);
-        FacadeFrontend.getInstance().setUser(person);
-        FacadeFrontend.getInstance().addScreen(Scenes.DASHBOARD, loadedScreen);
-        FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+        ).start();
     }
 
     @FXML

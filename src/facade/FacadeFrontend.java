@@ -55,7 +55,7 @@ public class FacadeFrontend {
     }
     
     public void setUser(Person person){
-        this.dashboadController.intialize(person);
+        this.dashboadController.loadUser(person);
     }
     
     public Parent getScreen(Scenes scene) throws Exception {

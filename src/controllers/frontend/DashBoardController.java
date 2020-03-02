@@ -1,10 +1,12 @@
 package controllers.frontend;
 
+import controllers.backend.SessionController;
 import facade.FacadeFrontend;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,16 +42,24 @@ public class DashBoardController implements Initializable {
     private VBox vboxRoot;
     @FXML
     private VBox vboxSide;
+    private boolean isIntialized;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.initialize();
+       this.loadUser(SessionController.getInstance().getUser());
+        this.isIntialized = false;
+        this.btnList.setOnAction((event) -> {
+            if (!this.isIntialized) {
+                this.listStudents();
+                this.isIntialized = true;
+            }
+        });
     }
 
-    private void initialize() {
+    private void listStudents() {
         try {
             FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.LIST);
             Parent loadedScreen = loader.load();
@@ -60,13 +70,16 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    public void intialize(Person person) {
+    public void loadUser(Person person) {
         String name;
         String imagePath;
         if (person == null) {
             name = Admin.NAME.getValue();
             imagePath = Admin.IMAGE.getValue();
         } else {
+            Platform.runLater(() -> {
+                this.btnList.setVisible(false);
+            });
             name = person.getFirstName();
             imagePath = (person.getGenere() == Genere.MASCULINO)
                     ? Icons.USER_MALE.getIconPath()
