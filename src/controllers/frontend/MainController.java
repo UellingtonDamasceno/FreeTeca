@@ -99,11 +99,10 @@ public class MainController implements Initializable {
     private void setAllBinds() {
         ImageAcessibilidade.setOnMouseEntered((event) -> {
             if (!this.btnAccessbility.isSelected()) {
-                AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
-            } else {
                 AudioController.getInstance().playAudio(Settings.Phrase.DESLIGAR_ACESSIBILIDADE.getPhrase());
+            } else {
+                AudioController.getInstance().playAudio(Settings.Phrase.LIGAR_ACESSIBILIDADE.getPhrase());
             }
-
         });
         this.btnAccessbility.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -164,7 +163,7 @@ public class MainController implements Initializable {
                     return image;
                 }).forEachOrdered((_item) -> {
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(2500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -228,47 +227,54 @@ public class MainController implements Initializable {
                     }
                 } else {
                     Platform.runLater(() -> {
+                        this.btnRegister.setDisable(true);
                         this.lblInfo.setText("Aguarde, estamos preparando tudo!");
                         this.btnEntry.setDisable(true);
                     });
                     try {
                         user = ValidationController.getInstance().login(this.txtEmail.getText(), this.txtPassword.getText());
+                        if (user.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
+                            SessionController.getInstance().setUser(user);
+                            Platform.runLater(() -> {
+                                try {
+                                    this.activated = false;
+                                    FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
+                                } catch (Exception ex) {
+                                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                this.btnRegister.setDisable(false);
+                                this.btnEntry.setDisable(false);
+                            });
+                            NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
+                        }
                     } catch (MissingValuesException ex) {
                         Platform.runLater(() -> {
+                            this.btnRegister.setDisable(false);
                             this.btnEntry.setDisable(false);
                         });
                         NotificationsController.getInstance().errorNotification("Campo vazio.", ex.getMessage());
                     } catch (NotFoundException ex) {
                         Platform.runLater(() -> {
+                            this.btnRegister.setDisable(false);
                             this.btnEntry.setDisable(false);
                         });
                         NotificationsController.getInstance().errorNotification("User inexistente", "Não existe um user com o email: \n" + this.txtEmail.getText());
                     } catch (SQLException ex) {
                         Platform.runLater(() -> {
+                            this.btnRegister.setDisable(false);
                             this.btnEntry.setDisable(false);
                         });
                         NotificationsController.getInstance().errorNotification("Você está conectado?", "Verifique sua rede e tente novamente!");
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    this.lblInfo.setText("");
-
-                    if (user.authenticate(this.txtEmail.getText(), this.txtPassword.getText())) {
-                        SessionController.getInstance().setUser(user);
-                        Platform.runLater(() -> {
-                            try {
-                                this.activated = false;
-                                FacadeFrontend.getInstance().changeScreean(Scenes.DASHBOARD);
-                            } catch (Exception ex) {
-                                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        });
-                    } else {
-                        Platform.runLater(() -> {
-                            this.btnEntry.setDisable(false);
-                        });
-                        NotificationsController.getInstance().infoNotification("Senhas não conferem!", "A senha digitada não confere!");
-                    }
+                    Platform.runLater(() -> {
+                        this.btnRegister.setDisable(false);
+                        this.lblInfo.setText("");
+                    });
                 }
             } catch (Exception ex) {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,6 +284,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
+
     private void lblEmailEntered(MouseEvent event) {
         AudioController.getInstance().playAudio(Settings.Phrase.EMAIL.getPhrase());
     }

@@ -1,6 +1,7 @@
 package facade;
 
 import controllers.frontend.DashBoardController;
+import controllers.frontend.EditFormsController;
 import controllers.frontend.ListController;
 import controllers.frontend.MainController;
 import controllers.frontend.ScreensController;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import model.Person;
+import model.Student;
 import util.Settings.Scenes;
 
 /**
@@ -24,6 +26,7 @@ public class FacadeFrontend {
     private MainController mainController;
     private ListController listController;
     private DashBoardController dashboadController;
+    private EditFormsController editFormController;
     
     private FacadeFrontend() {
         this.screensController = new ScreensController();
@@ -50,14 +53,18 @@ public class FacadeFrontend {
         this.listController = (ListController) controller;
     }
 
-    public void setDashBoardController(Object controller){
+    public void setDashBoardController(Object controller) {
         this.dashboadController = (DashBoardController) controller;
     }
     
-    public void setUser(Person person){
+    public void setEditFormController(Object controller){
+        this.editFormController = (EditFormsController) controller;
+    }
+
+    public void setUser(Person person) {
         this.dashboadController.loadUser(person);
     }
-    
+
     public Parent getScreen(Scenes scene) throws Exception {
         return this.screensController.loadScreen(scene);
     }
@@ -75,12 +82,28 @@ public class FacadeFrontend {
         this.stageController.changeStageContent(name, scene.getTitle(), content);
     }
 
+    public void updateScreen(Scenes scene, Parent parent){
+        this.screensController.updateScreen(scene, parent);
+    }
+    
     public void addScreen(Scenes scene, Parent parent) {
         this.screensController.addScreen(scene, parent);
     }
 
+    public void loadStudent(Student student){
+        this.editFormController.load(student);
+    }
+    
     public void changeSideBar(Scenes scene) {
         this.mainController.changeSideBar(scene);
+    }
+
+    public void changeDashboardSideBar(Scenes scene) {
+        this.dashboadController.changeSide(scene);
+    }
+
+    public void changeDashBoardCenter(Scenes scene) {
+        this.dashboadController.changeCenter(scene);
     }
 
     public FXMLLoader getLoaderScreen(Scenes scene) {
@@ -89,5 +112,9 @@ public class FacadeFrontend {
 
     public void removeItemList(Parent root) {
         this.listController.removeItem(root);
+    }
+
+    public void updateItemList(Student student) {
+        this.listController.update(student);
     }
 }

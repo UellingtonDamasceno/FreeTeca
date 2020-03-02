@@ -29,6 +29,7 @@ public class ListController implements Initializable {
 
     @FXML
     private VBox vboxList;
+    private List<Student> students;
 
     /**
      * Initializes the controller class.
@@ -36,29 +37,57 @@ public class ListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.initialize();
+        this.students = new LinkedList();
     }
 
     private void initialize() {
-        StudentDAO studentDAO = new StudentDAO();
+        new Thread(() -> {
+            StudentDAO studentDAO = new StudentDAO();
+            int[] i = new int[1];
+
+            try {
+                List<Student> stTemp = studentDAO.read();
+                System.out.println(stTemp);
+                stTemp.forEach((student) -> {
+                    try {
+                        this.add(student, 0);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            } catch (ClassNotFoundException ex) {
+                NotificationsController.getInstance().errorNotification("Aconteceu um erro inesperado!", "Você nunca deveria ter visto esse erro!");
+            } catch (SQLException ex) {
+                NotificationsController.getInstance().errorNotification("Você está conectado?", "Verifique sua rede e tente novamente!");
+            }
+        }).start();
+
+    }
+
+    private void add(Student student, int pos) throws IOException {
+        FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.ITEM_LIST);
+        Parent loadedScreen = loader.load();
+        ItemListController itemController = loader.getController();
+        students.add(pos, student);
+        itemController.loadStudent(student);
+        Platform.runLater(() -> {
+            vboxList.getChildren().add(pos, loadedScreen);
+        });
+    }
+
+    public void update(Student student) {
+        int value = students.indexOf(student);
+        System.out.println(student);
+        System.out.println(value);
+        this.students.remove(student);
+        Platform.runLater(() -> {
+            vboxList.getChildren().remove(value);
+        });
+
         try {
-            List<Student> students = studentDAO.read();
-            students.forEach((student) -> {
-                FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.ITEM_LIST);
-                try {
-                    Parent loadedScreen = loader.load();
-                    ItemListController itemController = loader.getController();
-                    itemController.loadStudent(student);
-                    Platform.runLater(() -> {
-                        vboxList.getChildren().add(loadedScreen);
-                    });
-                } catch (IOException ex) {
-                    Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        } catch (ClassNotFoundException ex) {
-            NotificationsController.getInstance().errorNotification("Aconteceu um erro inesperado!", "Você nunca deveria ter visto esse erro!");
-        } catch (SQLException ex) {
-            NotificationsController.getInstance().errorNotification("Você está conectado?", "Verifique sua rede e tente novamente!");
+            this.add(student, value);
+        } catch (IOException ex) {
+            Logger.getLogger(ListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

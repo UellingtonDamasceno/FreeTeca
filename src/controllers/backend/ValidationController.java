@@ -5,7 +5,6 @@
  */
 package controllers.backend;
 
-import DAO.AdministratorDAO;
 import DAO.StudentDAO;
 import java.sql.SQLException;
 import model.LogablePerson;
@@ -41,6 +40,10 @@ public class ValidationController {
             Student student = studentDAO.readStudentForEmail(email);
             return student;
         }
+    }
+    
+    public void registerPerson(String firstName, String lastName, String gender, String cpf, String adress) throws MissingValuesException{
+        this.registerPerson(firstName, lastName, "1234654", gender, cpf, adress);
     }
 
     public void registerPerson(String firstName, String lastName, String birth, String gender, String cpf, String adress) throws MissingValuesException {
@@ -90,4 +93,7 @@ public class ValidationController {
         return temp;
     }
 
+    public Student getStudent() {
+        return this.temp;
+    }
 }

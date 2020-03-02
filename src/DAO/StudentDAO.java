@@ -60,20 +60,20 @@ public class StudentDAO {
         PreparedStatement stmt = null;
         try {
             //name, cpf, sexo, andress, income, institution, course, half, registration, status
-            stmt = con.prepareStatement("UPDATE alunos SET firstName = ?, lastName = ?, cpf = ?, andress = ?,"
-                    + " sexo = ?, institution = ?, course = ?, registration = ?, email = ?, recoveryemail = ? password = ? ");
+            stmt = con.prepareStatement("UPDATE alunos SET  firstName = ?, lastName = ?, andress = ?,"
+                    + " sexo = ?, institution = ?, course = ?, registration = ?, email = ?, recoveryemail = ?, password = ? WHERE cpf = ?");
             System.out.println(stmt.toString());
             stmt.setString(1, a.getFirstName());
             stmt.setString(2, a.getLastName());
-            stmt.setString(3, a.getCpf());
-            stmt.setString(4, a.getAddress());
-            stmt.setString(5, String.valueOf(a.getGenere()));
-            stmt.setString(6, String.valueOf(a.getInstitution()));
-            stmt.setString(7, String.valueOf(a.getCourse()));
-            stmt.setString(8, a.getRegistration());
-            stmt.setString(9, a.getLogin().getEmail());
-            stmt.setString(10, a.getLogin().getRecoveryEmail());
-            stmt.setString(11, a.getLogin().getPassword());
+            stmt.setString(3, a.getAddress());
+            stmt.setString(4, String.valueOf(a.getGenere()));
+            stmt.setString(5, String.valueOf(a.getInstitution()));
+            stmt.setString(6, String.valueOf(a.getCourse()));
+            stmt.setString(7, a.getRegistration());
+            stmt.setString(8, a.getLogin().getEmail());
+            stmt.setString(9, a.getLogin().getRecoveryEmail());
+            stmt.setString(10, a.getLogin().getPassword());
+            stmt.setString(11, a.getCpf());
             System.out.println(stmt.toString());
             stmt.executeUpdate();
             System.out.println("Atualizado com sucesso!");

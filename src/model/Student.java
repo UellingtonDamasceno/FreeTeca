@@ -62,7 +62,6 @@ public class Student extends LogablePerson{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 17 * hash + Objects.hashCode(this.registration);
         hash = 17 * hash + Objects.hashCode(this.cpf);
         return hash;
     }

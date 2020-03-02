@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,15 +59,11 @@ public class RegisterAcademyController implements Initializable {
             Course newValue = comboCourse.getSelectionModel().getSelectedItem();
             AudioController.getInstance().playAudio(newValue.getCurso());
         });
-        
-        comboAcademy.setOnAction((event)->{
+
+        comboAcademy.setOnAction((event) -> {
             Instituition temp = comboAcademy.getSelectionModel().getSelectedItem();
             AudioController.getInstance().playAudio(temp.getAudio());
         });
-        
-        
-        
-
         MaskFieldUtil.reproducer(txtID);
     }
 
@@ -116,20 +113,43 @@ public class RegisterAcademyController implements Initializable {
 
     @FXML
     private void save(ActionEvent event) {
-        try {
-            ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                this.comboAcademy.setDisable(true);
+                this.comboCourse.setDisable(true);
+                this.btnReturn.setDisable(true);
+                this.btnSave.setDisable(true);
+                this.btnEdit.setDisable(true);
+                this.txtID.setDisable(true);
+            });
+
             try {
-                Student student = ValidationController.getInstance().save();
-                NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
-                FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                NotificationsController.getInstance().errorNotification("Conexão falida!", "Conecte-se com a internet e tente novamente!");
+                ValidationController.getInstance().registerAcademy(comboAcademy.getValue().name(), comboCourse.getValue().getName(), txtID.getText());
+                try {
+                    Student student = ValidationController.getInstance().save();
+                    NotificationsController.getInstance().sucessNotification("Novo usúario adcionado", student + "Seu cadastro foi efetuado com sucesso!");
+                    Platform.runLater(() -> {
+                        FacadeFrontend.getInstance().changeSideBar(Settings.Scenes.HOME_SIDE);
+                    });
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(RegisterAcademyController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    NotificationsController.getInstance().errorNotification("Conexão falida!", "Conecte-se com a internet e tente novamente!");
+                }
+            } catch (MissingValuesException ex) {
+                NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
             }
-        } catch (MissingValuesException ex) {
-            NotificationsController.getInstance().errorNotification("Campo vazio!", ex.getMessage());
-        }
+
+            Platform.runLater(() -> {
+                this.comboAcademy.setDisable(true);
+                this.comboCourse.setDisable(true);
+                this.btnReturn.setDisable(false);
+                this.btnSave.setDisable(false);
+                this.btnEdit.setDisable(false);
+                this.txtID.setDisable(false);
+            });
+        }).start();
+
     }
 
     public void load(Student a) {

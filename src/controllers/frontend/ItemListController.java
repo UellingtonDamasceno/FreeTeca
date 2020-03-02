@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.frontend;
 
 import DAO.StudentDAO;
 import controllers.backend.NotificationsController;
 import facade.FacadeFrontend;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import model.Student;
+import util.Settings;
 import util.Settings.Icons;
 
 /**
@@ -52,7 +49,9 @@ public class ItemListController implements Initializable {
     }    
 
     public void loadStudent(Student student) {
-        Image image = new Image(Icons.BOOKS.getIconPath());
+        Image image = new Image((student.getGenere() == Settings.Genere.MASCULINO)
+                    ? Icons.USER_MALE.getIconPath()
+                    : Icons.USER_FEMALE.getIconPath());
         this.imgIcon.setImage(image);
         this.lblName.setText(student.getFirstName() + " " + student.getLastName());
         this.lblInstituation.setText(student.getInstitution().getName());
@@ -61,7 +60,8 @@ public class ItemListController implements Initializable {
     }
 
     @FXML
-    private void show(ActionEvent event) {
+    private void show(ActionEvent event) throws IOException {
+        FacadeFrontend.getInstance().loadStudent(this.student);
     }
 
     @FXML

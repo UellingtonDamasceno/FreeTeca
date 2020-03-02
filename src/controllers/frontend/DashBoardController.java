@@ -2,6 +2,7 @@ package controllers.frontend;
 
 import controllers.backend.SessionController;
 import facade.FacadeFrontend;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,6 +43,11 @@ public class DashBoardController implements Initializable {
     private VBox vboxRoot;
     @FXML
     private VBox vboxSide;
+    @FXML
+    private VBox vboxLeft;
+    @FXML
+    private Button btnEdit;
+
     private boolean isIntialized;
 
     /**
@@ -49,7 +55,7 @@ public class DashBoardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.loadUser(SessionController.getInstance().getUser());
+        this.loadUser(SessionController.getInstance().getUser());
         this.isIntialized = false;
         this.btnList.setOnAction((event) -> {
             if (!this.isIntialized) {
@@ -57,9 +63,23 @@ public class DashBoardController implements Initializable {
                 this.isIntialized = true;
             }
         });
+        this.initialize();
     }
 
-    private void listStudents() {
+    private void initialize() {
+        try {
+            FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.EDIT_FORM);
+            Parent parent = loader.load();
+            Object controller = loader.getController();
+            FacadeFrontend.getInstance().setEditFormController(controller);
+            FacadeFrontend.getInstance().updateScreen(Scenes.EDIT_FORM, parent);
+            this.changeSide(Scenes.EDIT_FORM);
+        } catch (IOException ex) {
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void listStudents() {
         try {
             FXMLLoader loader = FacadeFrontend.getInstance().getLoaderScreen(Scenes.LIST);
             Parent loadedScreen = loader.load();
@@ -76,9 +96,12 @@ public class DashBoardController implements Initializable {
         if (person == null) {
             name = Admin.NAME.getValue();
             imagePath = Admin.IMAGE.getValue();
+            Platform.runLater(() -> {
+                this.vboxLeft.getChildren().remove(this.btnEdit);
+            });
         } else {
             Platform.runLater(() -> {
-                this.btnList.setVisible(false);
+                this.vboxLeft.getChildren().remove(this.btnList);
             });
             name = person.getFirstName();
             imagePath = (person.getGenere() == Genere.MASCULINO)

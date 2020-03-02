@@ -20,6 +20,7 @@ public class Settings {
         REGISTER_ACADEMY("RegisterAcademy.fxml", "Academy", true),
         DASHBOARD("DashBoard.fxml", "Dash", false),
         ITEM_LIST("ItemList.fxml", "Item", true),
+        EDIT_FORM("EditForms.fxml", "Form", true),
         LIST("List.fxml", "List", true);
 
         private final String name;

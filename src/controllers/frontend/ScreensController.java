@@ -37,7 +37,7 @@ public class ScreensController {
     public void addScreen(Scenes scene, Parent content) {
         if (scene != null && content != null && !this.allScreens.containsKey(scene)) {
             allScreens.put(scene, content);
-        } 
+        }
     }
 
     public Parent getScreen(Scenes scene) throws Exception {
@@ -62,6 +62,13 @@ public class ScreensController {
 
     private Parent loadFXML(Scenes scene) throws IOException {
         return getLoaderFXML(scene).load();
+    }
+
+    public void updateScreen(Scenes scene, Parent parent) {
+        if (this.allScreens.containsKey(scene)) {
+            this.allScreens.remove(scene);
+        }
+        this.allScreens.put(scene, parent);
     }
 
 }
